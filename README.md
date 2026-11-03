@@ -2,8 +2,8 @@
 
 How much does the whole store sell? Exact order-number arithmetic + a temporal allocation model, validated against a simulator with ground truth.
 
-[![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue)
+[![CI](https://github.com/chasebak/ordergaps/actions/workflows/ci.yml/badge.svg)](https://github.com/chasebak/ordergaps/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ![Weekly volume error falls as the observed fraction of orders grows](figures/hero_error_vs_fraction.png)

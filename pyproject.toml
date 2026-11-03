@@ -7,7 +7,7 @@ name = "ordergaps"
 version = "0.1.0"
 description = "Market volume from sequential order-number gaps: exact ID arithmetic plus a temporal allocation model, validated against a simulator with ground truth."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Chase Baker", email = "chasebak@usc.edu" }]
 dependencies = [
@@ -24,7 +24,7 @@ where = ["src"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
