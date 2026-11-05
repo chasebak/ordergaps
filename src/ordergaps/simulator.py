@@ -268,3 +268,40 @@ def _true_weekday_rates(orders, config, start, n_days):
         if weekday_minutes > 0.0:
             rates[weekday] = counts.get(weekday, 0) / weekday_minutes
     return rates
+
+
+def true_daily_mean(config, day_index, channel="total"):
+    """The TRUE expected number of orders created on one simulated day.
+
+    Read-only: computed from the config alone, with no random draws, so
+    adding it changes nothing simulate() produces (tests/test_frozen_hashes.py
+    pins simulate() output from before this helper existed).
+
+    Rule (mirrors simulate()): with drift = 1 + drift_per_week * (day_index // 7),
+    in-store mean = in_store_daily[weekday] * drift on a scheduled-open day
+    (0 when the day is closed or its in-store rate is 0), online mean =
+    online_daily * drift; the hour-window weights inside simulate() are
+    normalized, so they sum back to these daily means exactly. channel is
+    "in_store", "online" or "total" (voids included: they are created orders).
+
+    This is the forecast oracle's input: the best any model can do, because
+    the realized count is Poisson around it. Failure mode: it goes stale if
+    simulate()'s rate logic changes without it; tests/test_forecast.py checks
+    parity (simulated daily means match it within Poisson error).
+    """
+    day_ts = pd.Timestamp(config.start_day) + pd.Timedelta(days=day_index)
+    weekday = day_ts.weekday()
+    week_index = day_index // 7
+    drift = 1.0 + config.drift_per_week * week_index
+    in_store_mean = 0.0
+    scheduled = config.store_hours.for_weekday(weekday)
+    if scheduled is not None and config.in_store_daily[weekday] > 0.0:
+        in_store_mean = config.in_store_daily[weekday] * drift
+    online_mean = config.online_daily * drift
+    if channel == "in_store":
+        return in_store_mean
+    if channel == "online":
+        return online_mean
+    if channel == "total":
+        return in_store_mean + online_mean
+    raise ValueError(f"unknown channel {channel!r}")

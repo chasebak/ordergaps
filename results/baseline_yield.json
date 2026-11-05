@@ -1,0 +1,108 @@
+{
+  "caveat": "'volume' here means orders CREATED, not fulfilled: cancelled, voided and test orders consume order numbers and are counted.",
+  "kpi": {
+    "channel_err_median": 0.2082764322,
+    "channel_err_p25": 0.2014688954,
+    "channel_err_p75": 0.2107444841,
+    "n_windows": 13713,
+    "n_windows_exact": 13713,
+    "table_share": 0.1
+  },
+  "regenerate": "python -m ordergaps.evaluation.run_all --outdir figures --baseline-outdir results",
+  "rows": [
+    {
+      "full_day_yield": 0.02083333333,
+      "model_minus_uniform": -0.001598307897,
+      "model_weekly_err": 0.003770600358,
+      "n_clean_weeks": 48,
+      "n_full_days": 10,
+      "n_open_days": 480,
+      "n_weeks_allocators_differ": 29,
+      "share": 0.02,
+      "uniform_weekly_err": 0.005368908255,
+      "verdict": "model lower"
+    },
+    {
+      "full_day_yield": 0.1333333333,
+      "model_minus_uniform": 0.0004845185445,
+      "model_weekly_err": 0.003047533231,
+      "n_clean_weeks": 48,
+      "n_full_days": 64,
+      "n_open_days": 480,
+      "n_weeks_allocators_differ": 8,
+      "share": 0.05,
+      "uniform_weekly_err": 0.002563014686,
+      "verdict": "uniform lower"
+    },
+    {
+      "full_day_yield": 0.35625,
+      "model_minus_uniform": -6.591949209e-17,
+      "model_weekly_err": 0.001108121862,
+      "n_clean_weeks": 48,
+      "n_full_days": 171,
+      "n_open_days": 480,
+      "n_weeks_allocators_differ": 0,
+      "share": 0.1,
+      "uniform_weekly_err": 0.001108121862,
+      "verdict": "tie"
+    },
+    {
+      "full_day_yield": 0.6854166667,
+      "model_minus_uniform": 0.0,
+      "model_weekly_err": 0.0006764435203,
+      "n_clean_weeks": 48,
+      "n_full_days": 329,
+      "n_open_days": 480,
+      "n_weeks_allocators_differ": 0,
+      "share": 0.2,
+      "uniform_weekly_err": 0.0006764435203,
+      "verdict": "tie"
+    },
+    {
+      "full_day_yield": 0.9020833333,
+      "model_minus_uniform": 6.2883726e-17,
+      "model_weekly_err": 0.0003447249905,
+      "n_clean_weeks": 48,
+      "n_full_days": 433,
+      "n_open_days": 480,
+      "n_weeks_allocators_differ": 0,
+      "share": 0.35,
+      "uniform_weekly_err": 0.0003447249905,
+      "verdict": "tie"
+    },
+    {
+      "full_day_yield": 0.9854166667,
+      "model_minus_uniform": -3.062871137e-17,
+      "model_weekly_err": 0.0001503113071,
+      "n_clean_weeks": 48,
+      "n_full_days": 473,
+      "n_open_days": 480,
+      "n_weeks_allocators_differ": 0,
+      "share": 0.6,
+      "uniform_weekly_err": 0.0001503113071,
+      "verdict": "tie"
+    }
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606,
+    707,
+    808
+  ],
+  "why_this_metric": {
+    "full_day_yield": {
+      "kind": "Counted: the estimator's own day labels (FULL / non-closed days), pooled over seeds; no truth involved, so section 3's full-day error is what says FULL is earned.",
+      "lie": "A looser pin rule would raise the yield without making full days more exact (section 3 prints the per-day error on full days, measured against truth).",
+      "question": "How much of the store must I see before a single day's count means anything?"
+    },
+    "uniform_baseline": {
+      "kind": "Simulated: median |est - true| / true over clean weeks, the same weeks, gaps and unseen counts for both allocators; truth = the simulator's weekly totals.",
+      "lie": "A baseline fed different counts than the model (both must hand out the same total, and a week no gap straddles must come out identical: tests/test_baseline.py).",
+      "question": "Is the timing model worth anything for weekly totals, or would spreading each gap evenly over the clock do as well?"
+    }
+  }
+}

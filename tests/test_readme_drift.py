@@ -4,12 +4,34 @@ exactly what the generator prints.
 Why: the README's "Results" tables are copied by hand from the output of
 `python -m ordergaps.evaluation.run_all` (out/results.md). out/ is not
 committed, so the source of truth in CI is the generator itself:
-run_all.results_markdown() fed by the frozen matrix. If the code, the seeds
-or the README change without the other, this test fails.
+run_all.results_markdown() fed by the frozen matrix for sections 1-3, and
+the committed results/forecast.md for section 4 (itself checked against
+the code by tests/test_forecast_outputs.py). If the code, the seeds or the
+README change without the other, this test fails.
+
+Sections 1.1, 1.2 and 1.3 (uniform baseline, full-day yield, estimation
+KPI table with the window-exactness guarantee) are generated from the same
+frozen matrix by run_all.baseline_outputs(); their README block
+must equal the committed results/baseline_yield.md byte for byte, and that
+file must equal a fresh generation (it holds the shared "why this metric"
+text and the verdict sentence, which are not number-token checked).
+
+Section 4 and the README's top headline are also checked as exact text:
+the section-4 block must equal results/forecast.md byte for byte (it holds
+the shared "why this metric" text, which must not be reworded on one side
+only), and the two headline lines under the title must equal
+forecast_summary.json "readme_headline".
+
+The why boxes under tables 1, 2 and 3 must equal the shared
+run_all.WHY_THIS_METRIC text (run_all.section_why_block, also shown on the
+Gap Explorer page), one box per section; the README's "Try it" line must
+equal viz.readme_try_it_line(), which is also written into
+docs/data/summary.json (its share stops come from run_all.SHARES).
 
 Rule (what is checked):
 - Only the README section "## Results ..." up to the next "## " heading.
-- Inside it, only the lines the generator emits:
+- Inside it, only the lines the generator emits (sections are numbered
+  "1."..."4.", "1.1"..."1.3" and "4.0"..."4.6"):
   1. every table row, keyed by (section number, first cell); the row's list
      of number tokens must equal the generated row's list, and every
      generated row must appear in the README (a dropped row is drift too);
@@ -30,6 +52,7 @@ also requires a minimum number of checked rows, and a control mutates one
 README number and requires the check to catch it).
 """
 
+import json
 import re
 from pathlib import Path
 
@@ -39,15 +62,40 @@ from ordergaps.evaluation.experiments import (
     error_curve,
     length_bias_summary,
 )
-from ordergaps.evaluation.run_all import TABLE_SHARE, results_markdown
+from ordergaps.evaluation.forecast_experiment import structures_close
+from ordergaps.evaluation.run_all import (
+    BASELINE_MARKDOWN_FILE,
+    BASELINE_SUMMARY_FILE,
+    SECTION_WHY_KEYS,
+    TABLE_SHARE,
+    baseline_outputs,
+    results_markdown,
+    section_why_block,
+)
+from ordergaps.viz import SUMMARY_PATH, readme_try_it_line
 
-README_PATH = Path(__file__).resolve().parent.parent / "README.md"
+REPO_ROOT = Path(__file__).resolve().parent.parent
+README_PATH = REPO_ROOT / "README.md"
+FORECAST_MARKDOWN_PATH = REPO_ROOT / "results" / "forecast.md"
+FORECAST_SUMMARY_PATH = REPO_ROOT / "results" / "forecast_summary.json"
+BASELINE_MARKDOWN_PATH = REPO_ROOT / "results" / BASELINE_MARKDOWN_FILE
+BASELINE_SUMMARY_PATH = REPO_ROOT / "results" / BASELINE_SUMMARY_FILE
+BASELINE_HEADING = "#### 1.1 "
+SECTION_TWO_HEADING = "### 2. "
 NUMBER_PATTERN = re.compile(r"[+-]?\d+(?:\.\d+)?%?")
-SECTION_PATTERN = re.compile(r"^#{2,3}\s+(\d+)\.")
+# "### 3. Title" -> "3"; "#### 4.1 Title" -> "4.1".
+SECTION_PATTERN = re.compile(r"^#{2,4}\s+(\d+(?:\.\d+)?)[.\s]")
 VERDICT_PATTERN = re.compile(r"Acceptance band:.*?(PASS|FAIL)")
-# 6 + 6 + 5 data rows plus 3 header rows exist today; fewer means the parser
+# Sections 1-3: 6 + 6 + 5 data rows plus 3 header rows; sections 1.1-1.3:
+# 6 + 6 + 3 data rows plus 3 header rows; section 4: 4 KPI rows, 3 x 4 model
+# rows, 6 share rows, 5 check rows plus 6 header rows. Fewer means the parser
 # stopped seeing the tables and the test would pass vacuously.
-MIN_CHECKED_ROWS = 20
+MIN_CHECKED_ROWS = 71
+SECTION_FOUR_HEADING = "### 4."
+
+
+def committed_forecast_markdown():
+    return FORECAST_MARKDOWN_PATH.read_text(encoding="utf-8")
 
 
 def generated_results_text(records):
@@ -56,8 +104,11 @@ def generated_results_text(records):
     check = acceptance_check(curve)
     bias_summary = length_bias_summary(records)
     table = counted_vs_allocated(records, TABLE_SHARE)
-    text = results_markdown(curve, check, bias_summary, table, elapsed_seconds=0.0)
-    return text
+    baseline_text = baseline_outputs(records)[BASELINE_MARKDOWN_FILE]
+    text = results_markdown(
+        curve, check, bias_summary, table, elapsed_seconds=0.0, baseline_text=baseline_text
+    )
+    return text + "\n" + committed_forecast_markdown()
 
 
 def readme_results_section(readme_text):
@@ -103,7 +154,7 @@ def parse_result_lines(lines):
         line = lines[index]
         heading_match = SECTION_PATTERN.match(line)
         if heading_match:
-            section = int(heading_match.group(1))
+            section = heading_match.group(1)
             headings[section] = number_tokens(line)
         elif line.startswith("|") and not is_separator_row(line):
             cells = line.strip().strip("|").split("|")
@@ -189,3 +240,145 @@ def test_drift_check_catches_a_dropped_section_heading(frozen_records):
     assert altered_text != readme_text
     problems = readme_drift(altered_text, generated_text)
     assert "generated heading 3 is missing from the README" in problems
+
+
+def readme_section_four(readme_text):
+    """README text from '### 4.' up to the blank line before the next
+    level-2 heading (forecast.md ends in one newline; the README adds the
+    blank separator line)."""
+    start = readme_text.index(SECTION_FOUR_HEADING)
+    rest = readme_text[start:]
+    end = rest.find("\n## ")
+    if end == -1:
+        return rest
+    return rest[:end]
+
+
+def readme_headline_block(readme_text):
+    """The bold headline paragraph and the owner's line right under it.
+
+    They are two one-line paragraphs: the headline, a blank line, the owner's
+    line. Returns [] when the headline line is missing.
+    """
+    lines = readme_text.splitlines()
+    n_lines = len(lines)
+    line_indexes = range(n_lines)
+    for index in line_indexes:
+        if lines[index].startswith("**Forecast error added by the partial view"):
+            if index + 2 < n_lines and lines[index + 1] == "":
+                return [lines[index], lines[index + 2]]
+            return [lines[index]]
+    return []
+
+
+def test_readme_section_four_is_the_committed_forecast_markdown():
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    section = readme_section_four(readme_text)
+    assert section == committed_forecast_markdown()
+
+
+def test_readme_headline_lines_match_the_summary():
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    summary = json.loads(FORECAST_SUMMARY_PATH.read_text(encoding="utf-8"))
+    assert readme_headline_block(readme_text) == summary["readme_headline"]
+    # The headline comes first, right under the title line.
+    lines = readme_text.splitlines()
+    assert lines[2].startswith("**Forecast error added by the partial view")
+
+
+def test_drift_check_catches_an_altered_forecast_number(frozen_records):
+    # Control that must fail: change one section-4 number in memory.
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    generated_text = generated_results_text(frozen_records)
+    summary = json.loads(FORECAST_SUMMARY_PATH.read_text(encoding="utf-8"))
+    added = summary["by_share"][0]["added"]
+    quoted = f"| {added:+.2%} |"
+    assert quoted in readme_text
+    altered_text = readme_text.replace(quoted, "| +9.99% |", 1)
+    problems = readme_drift(altered_text, generated_text)
+    assert len(problems) == 1
+    assert "+9.99%" in problems[0]
+    assert readme_section_four(altered_text) != committed_forecast_markdown()
+
+
+def readme_baseline_block(readme_text):
+    """README text from the section-1.1 heading up to the section-2 heading
+    (baseline_yield.md plus the blank separator line)."""
+    start = readme_text.index(BASELINE_HEADING)
+    end = readme_text.index(SECTION_TWO_HEADING, start)
+    return readme_text[start:end]
+
+
+def test_readme_baseline_block_is_the_committed_markdown():
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    committed = BASELINE_MARKDOWN_PATH.read_text(encoding="utf-8")
+    assert readme_baseline_block(readme_text) == committed + "\n"
+
+
+def test_committed_baseline_outputs_are_fresh(frozen_records):
+    fresh = baseline_outputs(frozen_records)
+    committed_markdown = BASELINE_MARKDOWN_PATH.read_text(encoding="utf-8")
+    assert committed_markdown == fresh[BASELINE_MARKDOWN_FILE]
+    committed_summary = json.loads(BASELINE_SUMMARY_PATH.read_text(encoding="utf-8"))
+    fresh_summary = json.loads(fresh[BASELINE_SUMMARY_FILE])
+    assert structures_close(committed_summary, fresh_summary)
+
+
+def test_drift_check_catches_an_altered_baseline_number(frozen_records):
+    # Control that must fail: change one section-1.1 number in memory. The
+    # uniform column is the baseline's own number, so it is the one picked.
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    generated_text = generated_results_text(frozen_records)
+    summary = json.loads(BASELINE_SUMMARY_PATH.read_text(encoding="utf-8"))
+    first_row = summary["rows"][0]
+    quoted = f"| {first_row['uniform_weekly_err']:.4%} |"
+    assert readme_text.count(quoted) == 1
+    altered_text = readme_text.replace(quoted, "| 9.9999% |")
+    problems = readme_drift(altered_text, generated_text)
+    assert len(problems) == 1
+    assert "9.9999%" in problems[0]
+    committed = BASELINE_MARKDOWN_PATH.read_text(encoding="utf-8")
+    assert readme_baseline_block(altered_text) != committed + "\n"
+
+
+def readme_results_subsection(readme_text, section):
+    """README text of results section '### N.' up to the next '### ' heading."""
+    start = readme_text.index(f"\n### {section}. ")
+    end = readme_text.find("\n### ", start + 1)
+    if end == -1:
+        end = readme_text.index("\n## ", start + 1)
+    return readme_text[start:end]
+
+
+def why_box_problems(readme_text):
+    """'section N: ...' for each results section whose why box is not the shared text."""
+    problems = []
+    sections = sorted(SECTION_WHY_KEYS)
+    for section in sections:
+        block = section_why_block(section)
+        subsection = readme_results_subsection(readme_text, section)
+        count = subsection.count(block)
+        if count != 1:
+            problems.append(f"section {section}: shared why box found {count} times")
+    return problems
+
+
+def test_readme_why_boxes_are_the_shared_text():
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    assert why_box_problems(readme_text) == []
+
+
+def test_control_a_reworded_why_box_is_caught():
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    original = section_why_block("2")
+    altered_text = readme_text.replace(original, original.replace("too high", "too big"))
+    assert altered_text != readme_text
+    assert why_box_problems(altered_text) == ["section 2: shared why box found 0 times"]
+
+
+def test_readme_try_it_line_is_the_generated_line():
+    readme_text = README_PATH.read_text(encoding="utf-8")
+    line = readme_try_it_line()
+    assert readme_text.splitlines().count(line) == 1
+    summary = json.loads((REPO_ROOT / SUMMARY_PATH).read_text(encoding="utf-8"))
+    assert summary["readme_try_it"] == line

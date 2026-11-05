@@ -1,7 +1,7 @@
 """Public privacy check: no "N% -> M%" style share-growth line.
 
 Why: the README once stated a real store-linked share change in that form;
-it is cut until the store owner OKs it (plan Decision 14). This guards the
+it is cut until the store owner OKs it. This guards the
 cut. Real store, vendor and staff names never appear here, not even in a
 test: they belong in a private deny file kept outside the repo (planned).
 

@@ -96,6 +96,102 @@ Fractional full-day estimates are rounded to integers for the check.
   from fulfilled ones inside a gap, hence the package-wide caveat: volume
   means orders CREATED, not fulfilled.
 
+## Forecasting (rolling-origin backtest)
+
+Target: orders per day (store total, and the vendor's own orders). A fold
+with origin o trains on days before o and forecasts days o .. o + 6; origins
+start after a 28-day warm-up and step by 7 days (`backtest.rolling_origins`).
+At every origin `estimate()` is re-run on the vendor's orders created before
+o, so no training value can depend on a later order; the estimator's last
+seen day (incomplete: orders after the last sighting are not yet counted)
+and any day inside a numbering-reset span are dropped, and the
+"trained on truth" series uses exactly the same days.
+
+Forecasts (`forecast.py`): seasonal naive ŷ_t = y_{t−7} (else y_{t−14}, …,
+the latest same-weekday training day); the 28-day average (weekday-blind);
+the weekday average of the last 4 same-weekday training values; and the
+oracle μ_t = `simulator.true_daily_mean`, the expected count the Poisson
+draws come from, scored at its median (the MAE-optimal point for a
+Poisson count). Intervals are central Poisson intervals around the point
+forecast, [q(α/2), q(1 − α/2)] with q the smallest k with CDF(k) ≥ p, all
+quantiles from one cumulative-pmf loop. Because counts are whole numbers,
+the oracle's 80% interval covers more than 80% (about 0.849 at μ = 10), so
+coverage is judged against the oracle's exact expected coverage
+("achievable"), with a Poisson-binomial standard error
+sqrt(Σ p_i (1 − p_i)) / n.
+
+Metrics: MAE; WAPE = Σ|e| ÷ Σ y; MASE = fold MAE ÷ in-sample seasonal-naive
+MAE on the fold's training days; the out-of-sample ratio to seasonal naive
+on the same test days; the headline = MAE(weekday average, estimated
+history) ÷ MAE(weekday average, true history) − 1. Pre-registered
+predictions: [PREDICTIONS.md](PREDICTIONS.md); choices and their
+measurements: [DECISIONS.md](DECISIONS.md).
+
+### Assumptions
+
+| knob | value | source | what changes if wrong |
+|---|---|---|---|
+| warm-up | 28 days | design choice (4 same-weekday values for the weekday average) | shorter: the first folds' weekday averages rest on fewer values; longer: fewer origins |
+| horizon / step | 7 days / 7 days | design choice ("next week's orders") | a longer horizon would widen errors under drift; overlapping test weeks would correlate folds |
+| fold count | 6 origins per seed on the frozen 10-week config | design choice, provisional until the repo owner confirms it (keep one config for every README number) | more weeks would tighten the across-fold sd; the point metrics are pooled over 336 test days either way |
+| weekday-average window | last 4 same-weekday values | design choice | a longer window lags drift more; a shorter one is noisier (variance μ/n) |
+| 28-day average window | 28 values | design choice (a deliberately weekday-blind baseline) | none for the conclusion: it exists to show what ignoring the weekday costs |
+| interval family | Poisson around the point forecast | design choice; the simulator's arrivals ARE Poisson | on real days with shocks (overdispersion) Poisson intervals under-cover; the oracle row would no longer be calibrated either |
+| truth is Poisson around `true_daily_mean` | by construction | simulator design | tested (parity and calibration in tests/test_forecast.py); a simulator change that breaks it fails those tests |
+| drift | +1% per week (linear, multiplicative) | illustrative (frozen config) | stronger drift hurts the 4-week weekday average first (it lags about 2.5 weeks of growth) |
+| vendor share | 0.10 (main), 0.02..0.60 (headline by share) | illustrative (frozen config) | lower shares mean more spread days in the estimated history; the headline measures exactly that cost |
+| what the vendor sees | register AND online orders | simulator design (README "Which data this uses") | a real vendor sees register sales only, so the "your own orders" series is easier here than in a real store |
+| seeds | 1101..1808 | design choice, frozen before the first run | none by design; old seeds 101..808 are trial seeds for forecasting |
+
+## Uniform-in-time baseline and full-day yield
+
+The baseline (`baseline.py`) gets exactly the model's gaps, so exactly the
+same unseen counts, and gives day d of a gap (t1, t2) with u unseen orders
+u × (minutes of (t1, t2) on d) ÷ (minutes of (t1, t2)): no store hours, no
+sessions, no learned pace. Because both allocators hand out every unseen
+order once, a week's total = seen orders + the unseen orders of the gaps
+inside it + a share of the gaps that straddle its start or end; a week no
+gap with unseen orders straddles is identical under both (tested, with a
+control in which straddled weeks do differ). README section 1.1 prints the
+median weekly error of both on the same clean weeks, and how many weeks
+differ at all.
+
+Full-day yield = FULL days ÷ non-closed days over every labelled day,
+pooled over seeds (README section 1.2). It counts the estimator's own
+labels; whether a FULL label is earned is measured against truth in
+section 3 (per-day error on full days).
+
+### Assumptions
+
+| knob | value | source | what changes if wrong |
+|---|---|---|---|
+| baseline spreading | even over wall-clock minutes of the gap | design choice (the simplest rival that uses the same counts) | a store-hours-aware baseline would sit closer to the model; this one shows what the timing model adds over the clock alone |
+| tie rule | the two medians print the same at 4 decimals of a percent | design choice (tie only what the reader cannot tell apart) | a looser rule could print a baseline win as a tie; the "weeks whose totals differ" column shows when a tie is exact |
+| "totals differ" tolerance | more than 1e-6 orders in a week | design choice (the same sums added in another order differ by far less) | a tolerance close to a real allocation difference would undercount the weeks that differ |
+| yield denominator | every non-closed labelled day, first and last day included | design choice (one count over the estimator's day_labels) | covered days only would move each share's yield by at most the two edge days per seed |
+
+## Gap Explorer page
+
+`python -m ordergaps.viz build` writes the page data in `docs/data/` from
+the simulator and the estimator alone: it takes no input file, exports no
+basket items or totals, and the page computes nothing. Per vendor share it
+carries the README's section 1-3 numbers (the same functions, the same
+formatted text), every frozen run's score (`experiments.score`, the one
+scoring function behind run_one), and one simulated week: each day's seen
+orders (counted), allocated orders (modelled) and true total, the learned
+vs true open-hours pace, and the largest gap that starts each day with its
+counted size (n2 - n1 - 1), the simulator's count and the modelled split.
+
+### Assumptions
+
+| knob | value | source | what changes if wrong |
+|---|---|---|---|
+| week shown | seed 101, ISO 2025-W12 | design choice (the first frozen seed; an interior week before the planted reset) | another seed or week shows other bars; the tiles and tables are medians over all seeds and do not change |
+| slider stops | the frozen shares only | frozen config (run_all.SHARES) | the page never interpolates between stops, so an unlisted share has no number |
+| worked gaps | the largest gap starting each day | design choice (the gap with the most orders to place) | small gaps sit inside one session and look trivially in-store; listing all would grow with the share |
+| pace unit | learned rate x 60 (orders per open hour) | arithmetic in Python | none; it rescales the learned and true pace alike |
+| number text | Python format strings shared with the README | design choice (one rounding rule) | a JavaScript formatter could print a different rounding than the README |
+
 ## References
 
 - Ruggles, R., & Brodie, H. (1947). An Empirical Approach to Economic

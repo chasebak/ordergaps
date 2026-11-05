@@ -1,0 +1,381 @@
+{
+  "by_share": [
+    {
+      "added": -0.005886549422,
+      "mae_est": 14.42598661,
+      "mae_true": 14.51140873,
+      "share": 0.02
+    },
+    {
+      "added": 0.01264765118,
+      "mae_est": 14.7265892,
+      "mae_true": 14.54265873,
+      "share": 0.05
+    },
+    {
+      "added": 0.004016096713,
+      "mae_est": 14.60106345,
+      "mae_true": 14.54265873,
+      "share": 0.1
+    },
+    {
+      "added": -0.00471752252,
+      "mae_est": 14.47405341,
+      "mae_true": 14.54265873,
+      "share": 0.2
+    },
+    {
+      "added": -0.001318680921,
+      "mae_est": 14.5234816,
+      "mae_true": 14.54265873,
+      "share": 0.35
+    },
+    {
+      "added": -0.002244252502,
+      "mae_est": 14.51002133,
+      "mae_true": 14.54265873,
+      "share": 0.6
+    }
+  ],
+  "diagnostics": {
+    "dropped_est_sum": 10950.43223,
+    "dropped_ratio": 0.967438133,
+    "dropped_true_sum": 11319.0,
+    "full_train_fraction": 0.2766798419,
+    "leak_days_changed": 464,
+    "leak_days_compared": 2024,
+    "leak_rates_changed": 288,
+    "leak_rates_compared": 288,
+    "train_days_mean": 42.16666667,
+    "zero_actual_test_days": 0
+  },
+  "headline": {
+    "added": 0.004016096713,
+    "is_null": true,
+    "mae_est": 14.60106345,
+    "mae_true": 14.54265873,
+    "n_seeds": 8,
+    "n_shares": 6,
+    "seed_added_max": 0.02299325171,
+    "seed_added_min": -0.02082776812,
+    "seed_added_sd": 0.01467970782,
+    "share": 0.1,
+    "share_added_max": 0.01264765118,
+    "share_added_min": -0.005886549422
+  },
+  "owner": {
+    "store_wape_naive": 0.06777180019,
+    "store_wape_weekday": 0.05639420328,
+    "vendor_wape_naive": 0.2177456382,
+    "vendor_wape_weekday": 0.166838843
+  },
+  "predictions": [
+    {
+      "claim": "weekday average MASE < 28-day average MASE (store, estimated history)",
+      "id": "P1",
+      "observed": "0.823 vs 3.304",
+      "passed": true
+    },
+    {
+      "claim": "weekday average test MAE / seasonal naive test MAE < 1",
+      "id": "P2",
+      "observed": "0.832",
+      "passed": true
+    },
+    {
+      "claim": "forecast error added by the partial view < 5% at every share >= 0.05",
+      "id": "P3",
+      "observed": "0.05: +1.26%; 0.10: +0.40%; 0.20: -0.47%; 0.35: -0.13%; 0.60: -0.22%",
+      "passed": true
+    },
+    {
+      "claim": "seasonal naive 80% coverage <= achievable 80% coverage - 0.10",
+      "id": "P4",
+      "observed": "0.655 vs achievable 0.811",
+      "passed": true
+    },
+    {
+      "claim": "oracle 80%/95% coverage within 3 Poisson-binomial SE of achievable",
+      "id": "P5",
+      "observed": "store_est 80%: 0.827 vs 0.811 (z +0.78); store_est 95%: 0.961 vs 0.954 (z +0.67); vendor 80%: 0.851 vs 0.834 (z +0.84); vendor 95%: 0.970 vs 0.961 (z +0.85)",
+      "passed": true
+    },
+    {
+      "claim": "the oracle has the lowest pooled MAE in every series",
+      "id": "B1",
+      "observed": "store_est 12.21 vs best other 14.60; store_true 12.21 vs best other 14.54; vendor 3.80 vs best other 4.33",
+      "passed": true
+    }
+  ],
+  "readme_headline": [
+    "**Forecast error added by the partial view: +0.40%** (a null: across the 8 seeds at this share it runs between -2.08% and +2.30%, sd 1.47%; across the 6 shares between -0.59% and +1.26%; a negative value means the estimated history did better than the truth by chance). A weekday-average forecast of daily store orders trained on the history this repo estimates from one vendor's own sales (vendor share 0.10) misses by 14.60 orders a day (MAE), vs 14.54 when trained on the true history (simulated store, 336 test days, Results section 4).",
+    "Next week's orders, day by day: the daily forecasts miss 5.64% vs 6.78% for last week's numbers (WAPE over the 7 days, store total; not the error on the week's sum); your own orders: 16.68% vs 21.77%."
+  ],
+  "setup": {
+    "horizon_days": 7,
+    "main_share": 0.1,
+    "n_folds": 48,
+    "n_origins_per_seed": 6,
+    "n_test_days": 336,
+    "n_weeks": 10,
+    "seeds": [
+      1101,
+      1202,
+      1303,
+      1404,
+      1505,
+      1606,
+      1707,
+      1808
+    ],
+    "shares": [
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.35,
+      0.6
+    ],
+    "step_days": 7,
+    "warmup_days": 28
+  },
+  "tables": {
+    "store_est": {
+      "avg28": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.4107142857,
+        "cov95": 0.5416666667,
+        "mae": 59.14178408,
+        "mae_mean": 59.14178408,
+        "mae_sd": 3.811402107,
+        "mase": 3.304383876,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 3.370508113,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.2284254023,
+        "width80": 41.5
+      },
+      "naive": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.6547619048,
+        "cov95": 0.8601190476,
+        "mae": 17.5468452,
+        "mae_mean": 17.5468452,
+        "mae_sd": 6.0787183,
+        "mase": 0.9895631813,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 1.0,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.06777180019,
+        "width80": 40.41666667
+      },
+      "oracle": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.8273809524,
+        "cov95": 0.9613095238,
+        "mae": 12.21428571,
+        "mae_mean": 12.21428571,
+        "mae_sd": 3.657503782,
+        "mase": 0.687962131,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 0.6960958268,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.04717566729,
+        "width80": 40.52380952
+      },
+      "weekday_avg": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.75,
+        "cov95": 0.9077380952,
+        "mae": 14.60106345,
+        "mae_mean": 14.60106345,
+        "mae_sd": 4.268316033,
+        "mase": 0.8225673345,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 0.8321190101,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.05639420328,
+        "width80": 40.1577381
+      }
+    },
+    "store_true": {
+      "avg28": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.4107142857,
+        "cov95": 0.5416666667,
+        "mae": 59.1457761,
+        "mae_mean": 59.1457761,
+        "mae_sd": 3.813778547,
+        "mase": 3.232181457,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 3.509887102,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.2284408208,
+        "width80": 41.58333333
+      },
+      "naive": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.6547619048,
+        "cov95": 0.8660714286,
+        "mae": 16.85119048,
+        "mae_mean": 16.85119048,
+        "mae_sd": 6.362474001,
+        "mase": 0.9329476033,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 1.0,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.06508494839,
+        "width80": 40.38392857
+      },
+      "oracle": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.8273809524,
+        "cov95": 0.9613095238,
+        "mae": 12.21428571,
+        "mae_mean": 12.21428571,
+        "mae_sd": 3.657503782,
+        "mase": 0.6735897513,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 0.7248322148,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.04717566729,
+        "width80": 40.52380952
+      },
+      "weekday_avg": {
+        "achievable80": 0.8107227655,
+        "achievable95": 0.9535944049,
+        "cov80": 0.744047619,
+        "cov95": 0.9107142857,
+        "mae": 14.54265873,
+        "mae_mean": 14.54265873,
+        "mae_sd": 4.284656541,
+        "mase": 0.8034653793,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 0.8630048275,
+        "se80": 0.02136910924,
+        "se95": 0.0114757839,
+        "wape": 0.05616862466,
+        "width80": 40.1547619
+      }
+    },
+    "vendor": {
+      "avg28": {
+        "achievable80": 0.834210328,
+        "achievable95": 0.9612977029,
+        "cov80": 0.5505952381,
+        "cov95": 0.6964285714,
+        "mae": 7.555909864,
+        "mae_mean": 7.555909864,
+        "mae_sd": 1.36675096,
+        "mase": 1.369908128,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 1.338316138,
+        "se80": 0.02027216862,
+        "se95": 0.01051919053,
+        "wape": 0.2914125016,
+        "width80": 12.89583333
+      },
+      "naive": {
+        "achievable80": 0.834210328,
+        "achievable95": 0.9612977029,
+        "cov80": 0.6517857143,
+        "cov95": 0.8511904762,
+        "mae": 5.645833333,
+        "mae_mean": 5.645833333,
+        "mae_sd": 1.503791585,
+        "mase": 1.023411292,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 1.0,
+        "se80": 0.02027216862,
+        "se95": 0.01051919053,
+        "wape": 0.2177456382,
+        "width80": 12.64880952
+      },
+      "oracle": {
+        "achievable80": 0.834210328,
+        "achievable95": 0.9612977029,
+        "cov80": 0.8511904762,
+        "cov95": 0.9702380952,
+        "mae": 3.797619048,
+        "mae_mean": 3.797619048,
+        "mae_sd": 1.094268546,
+        "mase": 0.6891732136,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 0.6726410121,
+        "se80": 0.02027216862,
+        "se95": 0.01051919053,
+        "wape": 0.1464646465,
+        "width80": 12.69047619
+      },
+      "weekday_avg": {
+        "achievable80": 0.834210328,
+        "achievable95": 0.9612977029,
+        "cov80": 0.7946428571,
+        "cov95": 0.943452381,
+        "mae": 4.325892857,
+        "mae_mean": 4.325892857,
+        "mae_sd": 1.071748306,
+        "mase": 0.7866340023,
+        "n_days": 336,
+        "n_folds": 48,
+        "ratio_vs_naive": 0.766209805,
+        "se80": 0.02027216862,
+        "se95": 0.01051919053,
+        "wape": 0.166838843,
+        "width80": 12.64583333
+      }
+    }
+  },
+  "why_this_metric": {
+    "by_share": {
+      "kind": "Ratio of two forecast MAEs on the same test days and training days, minus 1; near 0 means the partial view costs nothing.",
+      "lie": "Different training days (one side keeping the incomplete last day): the full-view identity test requires exactly 0 at share 1.0.",
+      "question": "Does seeing only part of the store cost me forecast accuracy?"
+    },
+    "diagnostics": {
+      "kind": "Counted checks on the backtest's own inputs: what a single run over all the data would rewrite, and what the dropped last day held.",
+      "lie": "A run-once implementation; tests/test_backtest.py shows the poison test fails on one.",
+      "question": "Is the backtest itself honest?"
+    },
+    "store_est": {
+      "kind": "Forecast, scored out of sample against the simulator's true daily totals; the history it learns from is this repo's estimate, re-run at each origin.",
+      "lie": "Look-ahead (guarded by the poison test in tests/test_backtest.py) and Poisson arrivals by construction (no real-day shocks: see What this does NOT claim).",
+      "question": "How many orders will the whole store take next week, from my own receipts?"
+    },
+    "store_true": {
+      "kind": "Forecast trained on the TRUE totals of exactly the same training days; it is the reference for the headline.",
+      "lie": "Unequal training days on the two sides (guarded by the matched-days and full-view identity tests in tests/test_backtest.py).",
+      "question": "How good could the same forecast be if I saw every store order?"
+    },
+    "vendor": {
+      "kind": "Forecast of the vendor's own daily orders, which are counted directly; truth = the simulator's realized vendor orders.",
+      "lie": "The simulated vendor also sees online orders (a real vendor sees register sales only); the oracle row shows how much is pure noise.",
+      "question": "How many orders will I myself get next week?"
+    }
+  }
+}

@@ -1,0 +1,1986 @@
+{
+ "by_share": [
+  {
+   "days": [
+    {
+     "allocated": 94.91630324,
+     "covered": true,
+     "day": "2025-03-17",
+     "day_text": "Mon 03-17",
+     "est_in_store": 0.0,
+     "est_online": 95.91630324,
+     "est_total": 95.91630324,
+     "label": "closed",
+     "seen": 1,
+     "seen_online": 1,
+     "seen_register": 0,
+     "true_in_store": 0,
+     "true_online": 87,
+     "true_total": 87,
+     "unseen_in_store": 0.0,
+     "unseen_online": 94.91630324,
+     "weekday": "Mon"
+    },
+    {
+     "allocated": 215.3176772,
+     "covered": true,
+     "day": "2025-03-18",
+     "day_text": "Tue 03-18",
+     "est_in_store": 179.1841584,
+     "est_online": 43.13351883,
+     "est_total": 222.3176772,
+     "label": "partial",
+     "seen": 7,
+     "seen_online": 3,
+     "seen_register": 4,
+     "true_in_store": 133,
+     "true_online": 91,
+     "true_total": 224,
+     "unseen_in_store": 175.1841584,
+     "unseen_online": 40.13351883,
+     "weekday": "Tue"
+    },
+    {
+     "allocated": 232.5940545,
+     "covered": true,
+     "day": "2025-03-19",
+     "day_text": "Wed 03-19",
+     "est_in_store": 192.7951248,
+     "est_online": 44.79892969,
+     "est_total": 237.5940545,
+     "label": "partial",
+     "seen": 5,
+     "seen_online": 2,
+     "seen_register": 3,
+     "true_in_store": 146,
+     "true_online": 90,
+     "true_total": 236,
+     "unseen_in_store": 189.7951248,
+     "unseen_online": 42.79892969,
+     "weekday": "Wed"
+    },
+    {
+     "allocated": 236.3240471,
+     "covered": true,
+     "day": "2025-03-20",
+     "day_text": "Thu 03-20",
+     "est_in_store": 205.9040521,
+     "est_online": 33.41999494,
+     "est_total": 239.3240471,
+     "label": "partial",
+     "seen": 3,
+     "seen_online": 0,
+     "seen_register": 3,
+     "true_in_store": 168,
+     "true_online": 84,
+     "true_total": 252,
+     "unseen_in_store": 202.9040521,
+     "unseen_online": 33.41999494,
+     "weekday": "Thu"
+    },
+    {
+     "allocated": 354.3865187,
+     "covered": true,
+     "day": "2025-03-21",
+     "day_text": "Fri 03-21",
+     "est_in_store": 306.6060308,
+     "est_online": 57.7804879,
+     "est_total": 364.3865187,
+     "label": "partial",
+     "seen": 10,
+     "seen_online": 1,
+     "seen_register": 9,
+     "true_in_store": 247,
+     "true_online": 113,
+     "true_total": 360,
+     "unseen_in_store": 297.6060308,
+     "unseen_online": 56.7804879,
+     "weekday": "Fri"
+    },
+    {
+     "allocated": 377.2024677,
+     "covered": true,
+     "day": "2025-03-22",
+     "day_text": "Sat 03-22",
+     "est_in_store": 335.0526663,
+     "est_online": 51.14980137,
+     "est_total": 386.2024677,
+     "label": "partial",
+     "seen": 9,
+     "seen_online": 3,
+     "seen_register": 6,
+     "true_in_store": 287,
+     "true_online": 87,
+     "true_total": 374,
+     "unseen_in_store": 329.0526663,
+     "unseen_online": 48.14980137,
+     "weekday": "Sat"
+    },
+    {
+     "allocated": 205.6990856,
+     "covered": true,
+     "day": "2025-03-23",
+     "day_text": "Sun 03-23",
+     "est_in_store": 168.4381256,
+     "est_online": 46.26096004,
+     "est_total": 214.6990856,
+     "label": "partial",
+     "seen": 9,
+     "seen_online": 2,
+     "seen_register": 7,
+     "true_in_store": 132,
+     "true_online": 87,
+     "true_total": 219,
+     "unseen_in_store": 161.4381256,
+     "unseen_online": 44.26096004,
+     "weekday": "Sun"
+    }
+   ],
+   "fraction_observed": 0.02038626609,
+   "fully_covered": true,
+   "gaps": [
+    {
+     "kind": "outside",
+     "n1": 4384,
+     "n2": 4456,
+     "split": [
+      {
+       "day": "2025-03-17",
+       "in_store": 0.0,
+       "online": 65.63473461
+      },
+      {
+       "day": "2025-03-18",
+       "in_store": 0.0,
+       "online": 5.36526539
+      }
+     ],
+     "start_day": "2025-03-17",
+     "t1": "2025-03-17 08:49",
+     "t2": "2025-03-18 01:14",
+     "truth_between": 71,
+     "unseen": 71
+    },
+    {
+     "kind": "mixed",
+     "n1": 4638,
+     "n2": 4701,
+     "split": [
+      {
+       "day": "2025-03-18",
+       "in_store": 22.58484643,
+       "online": 11.36756539
+      },
+      {
+       "day": "2025-03-19",
+       "in_store": 0.0,
+       "online": 28.04758818
+      }
+     ],
+     "start_day": "2025-03-18",
+     "t1": "2025-03-18 18:58",
+     "t2": "2025-03-19 09:52",
+     "truth_between": 62,
+     "unseen": 62
+    },
+    {
+     "kind": "mixed",
+     "n1": 4828,
+     "n2": 4907,
+     "split": [
+      {
+       "day": "2025-03-19",
+       "in_store": 65.79512476,
+       "online": 12.20487524
+      }
+     ],
+     "start_day": "2025-03-19",
+     "t1": "2025-03-19 17:10",
+     "t2": "2025-03-19 22:11",
+     "truth_between": 78,
+     "unseen": 78
+    },
+    {
+     "kind": "mixed",
+     "n1": 5096,
+     "n2": 5192,
+     "split": [
+      {
+       "day": "2025-03-20",
+       "in_store": 34.9592755,
+       "online": 17.91123783
+      },
+      {
+       "day": "2025-03-21",
+       "in_store": 0.0,
+       "online": 42.12948666
+      }
+     ],
+     "start_day": "2025-03-20",
+     "t1": "2025-03-20 18:32",
+     "t2": "2025-03-21 09:24",
+     "truth_between": 95,
+     "unseen": 95
+    },
+    {
+     "kind": "inside",
+     "n1": 5270,
+     "n2": 5377,
+     "split": [
+      {
+       "day": "2025-03-21",
+       "in_store": 106.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-21",
+     "t1": "2025-03-21 13:53",
+     "t2": "2025-03-21 16:56",
+     "truth_between": 106,
+     "unseen": 106
+    },
+    {
+     "kind": "mixed",
+     "n1": 5684,
+     "n2": 5887,
+     "split": [
+      {
+       "day": "2025-03-22",
+       "in_store": 200.4819896,
+       "online": 1.518010399
+      }
+     ],
+     "start_day": "2025-03-22",
+     "t1": "2025-03-22 14:55",
+     "t2": "2025-03-22 21:01",
+     "truth_between": 202,
+     "unseen": 202
+    },
+    {
+     "kind": "mixed",
+     "n1": 6056,
+     "n2": 6110,
+     "split": [
+      {
+       "day": "2025-03-23",
+       "in_store": 31.43812556,
+       "online": 21.56187444
+      }
+     ],
+     "start_day": "2025-03-23",
+     "t1": "2025-03-23 16:37",
+     "t2": "2025-03-23 22:33",
+     "truth_between": 53,
+     "unseen": 53
+    }
+   ],
+   "has_anomaly": false,
+   "n_gaps_touching_week": 45,
+   "n_observed": 361,
+   "pace": [
+    {
+     "learned_per_hour": null,
+     "open": false,
+     "source": "closed",
+     "true_per_hour": null,
+     "weekday": "Mon"
+    },
+    {
+     "learned_per_hour": 22.19299937,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.46666667,
+     "weekday": "Tue"
+    },
+    {
+     "learned_per_hour": 23.31950159,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.45555556,
+     "weekday": "Wed"
+    },
+    {
+     "learned_per_hour": 24.05562478,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.3,
+     "weekday": "Thu"
+    },
+    {
+     "learned_per_hour": 27.36451825,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 26.06,
+     "weekday": "Fri"
+    },
+    {
+     "learned_per_hour": 32.9692362,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 30.86363636,
+     "weekday": "Sat"
+    },
+    {
+     "learned_per_hour": 22.82465631,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.72857143,
+     "weekday": "Sun"
+    }
+   ],
+   "score": {
+    "n_windows": 359,
+    "n_windows_exact": 359,
+    "rate_bias": 0.05591934029,
+    "weekly_err_median": 0.003856140919
+   },
+   "share": 0.02,
+   "week_abs_rel_err": 0.004817439506,
+   "week_est_total": 1760.440154,
+   "week_true_total": 1752
+  },
+  {
+   "days": [
+    {
+     "allocated": 81.40487757,
+     "covered": true,
+     "day": "2025-03-17",
+     "day_text": "Mon 03-17",
+     "est_in_store": 0.0,
+     "est_online": 84.40487757,
+     "est_total": 84.40487757,
+     "label": "closed",
+     "seen": 3,
+     "seen_online": 3,
+     "seen_register": 0,
+     "true_in_store": 0,
+     "true_online": 87,
+     "true_total": 87,
+     "unseen_in_store": 0.0,
+     "unseen_online": 81.40487757,
+     "weekday": "Mon"
+    },
+    {
+     "allocated": 208.6148849,
+     "covered": true,
+     "day": "2025-03-18",
+     "day_text": "Tue 03-18",
+     "est_in_store": 169.5856669,
+     "est_online": 54.02921805,
+     "est_total": 223.6148849,
+     "label": "partial",
+     "seen": 15,
+     "seen_online": 6,
+     "seen_register": 9,
+     "true_in_store": 133,
+     "true_online": 91,
+     "true_total": 224,
+     "unseen_in_store": 160.5856669,
+     "unseen_online": 48.02921805,
+     "weekday": "Tue"
+    },
+    {
+     "allocated": 228.0542691,
+     "covered": true,
+     "day": "2025-03-19",
+     "day_text": "Wed 03-19",
+     "est_in_store": 190.5411877,
+     "est_online": 46.51308141,
+     "est_total": 237.0542691,
+     "label": "partial",
+     "seen": 9,
+     "seen_online": 5,
+     "seen_register": 4,
+     "true_in_store": 146,
+     "true_online": 90,
+     "true_total": 236,
+     "unseen_in_store": 186.5411877,
+     "unseen_online": 41.51308141,
+     "weekday": "Wed"
+    },
+    {
+     "allocated": 244.7960389,
+     "covered": true,
+     "day": "2025-03-20",
+     "day_text": "Thu 03-20",
+     "est_in_store": 199.8654524,
+     "est_online": 54.93058647,
+     "est_total": 254.7960389,
+     "label": "partial",
+     "seen": 10,
+     "seen_online": 2,
+     "seen_register": 8,
+     "true_in_store": 168,
+     "true_online": 84,
+     "true_total": 252,
+     "unseen_in_store": 191.8654524,
+     "unseen_online": 52.93058647,
+     "weekday": "Thu"
+    },
+    {
+     "allocated": 338.966422,
+     "covered": true,
+     "day": "2025-03-21",
+     "day_text": "Fri 03-21",
+     "est_in_store": 298.7322509,
+     "est_online": 58.23417105,
+     "est_total": 356.966422,
+     "label": "partial",
+     "seen": 18,
+     "seen_online": 3,
+     "seen_register": 15,
+     "true_in_store": 247,
+     "true_online": 113,
+     "true_total": 360,
+     "unseen_in_store": 283.7322509,
+     "unseen_online": 55.23417105,
+     "weekday": "Fri"
+    },
+    {
+     "allocated": 353.4965398,
+     "covered": true,
+     "day": "2025-03-22",
+     "day_text": "Sat 03-22",
+     "est_in_store": 332.5101646,
+     "est_online": 44.98637515,
+     "est_total": 377.4965398,
+     "label": "full",
+     "seen": 24,
+     "seen_online": 9,
+     "seen_register": 15,
+     "true_in_store": 287,
+     "true_online": 87,
+     "true_total": 374,
+     "unseen_in_store": 317.5101646,
+     "unseen_online": 35.98637515,
+     "weekday": "Sat"
+    },
+    {
+     "allocated": 198.6990856,
+     "covered": true,
+     "day": "2025-03-23",
+     "day_text": "Sun 03-23",
+     "est_in_store": 164.0193588,
+     "est_online": 50.67972677,
+     "est_total": 214.6990856,
+     "label": "partial",
+     "seen": 16,
+     "seen_online": 3,
+     "seen_register": 13,
+     "true_in_store": 132,
+     "true_online": 87,
+     "true_total": 219,
+     "unseen_in_store": 151.0193588,
+     "unseen_online": 47.67972677,
+     "weekday": "Sun"
+    }
+   ],
+   "fraction_observed": 0.0505985995,
+   "fully_covered": true,
+   "gaps": [
+    {
+     "kind": "outside",
+     "n1": 4384,
+     "n2": 4423,
+     "split": [
+      {
+       "day": "2025-03-17",
+       "in_store": 0.0,
+       "online": 38.0
+      }
+     ],
+     "start_day": "2025-03-17",
+     "t1": "2025-03-17 08:49",
+     "t2": "2025-03-17 19:46",
+     "truth_between": 38,
+     "unseen": 38
+    },
+    {
+     "kind": "inside",
+     "n1": 4556,
+     "n2": 4583,
+     "split": [
+      {
+       "day": "2025-03-18",
+       "in_store": 26.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-18",
+     "t1": "2025-03-18 15:46",
+     "t2": "2025-03-18 17:08",
+     "truth_between": 26,
+     "unseen": 26
+    },
+    {
+     "kind": "inside",
+     "n1": 4772,
+     "n2": 4828,
+     "split": [
+      {
+       "day": "2025-03-19",
+       "in_store": 55.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-19",
+     "t1": "2025-03-19 14:51",
+     "t2": "2025-03-19 17:10",
+     "truth_between": 55,
+     "unseen": 55
+    },
+    {
+     "kind": "inside",
+     "n1": 4968,
+     "n2": 5031,
+     "split": [
+      {
+       "day": "2025-03-20",
+       "in_store": 62.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-20",
+     "t1": "2025-03-20 12:44",
+     "t2": "2025-03-20 15:41",
+     "truth_between": 62,
+     "unseen": 62
+    },
+    {
+     "kind": "inside",
+     "n1": 5324,
+     "n2": 5371,
+     "split": [
+      {
+       "day": "2025-03-21",
+       "in_store": 46.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-21",
+     "t1": "2025-03-21 15:30",
+     "t2": "2025-03-21 16:50",
+     "truth_between": 46,
+     "unseen": 46
+    },
+    {
+     "kind": "inside",
+     "n1": 5791,
+     "n2": 5854,
+     "split": [
+      {
+       "day": "2025-03-22",
+       "in_store": 62.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-22",
+     "t1": "2025-03-22 17:56",
+     "t2": "2025-03-22 19:51",
+     "truth_between": 62,
+     "unseen": 62
+    },
+    {
+     "kind": "outside",
+     "n1": 6110,
+     "n2": 6158,
+     "split": [
+      {
+       "day": "2025-03-23",
+       "in_store": 0.0,
+       "online": 4.158585385
+      },
+      {
+       "day": "2025-03-24",
+       "in_store": 0.0,
+       "online": 42.84141462
+      }
+     ],
+     "start_day": "2025-03-23",
+     "t1": "2025-03-23 22:33",
+     "t2": "2025-03-24 14:52",
+     "truth_between": 47,
+     "unseen": 47
+    }
+   ],
+   "has_anomaly": false,
+   "n_gaps_touching_week": 96,
+   "n_observed": 896,
+   "pace": [
+    {
+     "learned_per_hour": null,
+     "open": false,
+     "source": "closed",
+     "true_per_hour": null,
+     "weekday": "Mon"
+    },
+    {
+     "learned_per_hour": 22.00365208,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.46666667,
+     "weekday": "Tue"
+    },
+    {
+     "learned_per_hour": 22.51291354,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.45555556,
+     "weekday": "Wed"
+    },
+    {
+     "learned_per_hour": 23.09137964,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.3,
+     "weekday": "Thu"
+    },
+    {
+     "learned_per_hour": 26.93382799,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 26.06,
+     "weekday": "Fri"
+    },
+    {
+     "learned_per_hour": 32.19316084,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 30.86363636,
+     "weekday": "Sat"
+    },
+    {
+     "learned_per_hour": 23.69156665,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.72857143,
+     "weekday": "Sun"
+    }
+   ],
+   "score": {
+    "n_windows": 894,
+    "n_windows_exact": 894,
+    "rate_bias": 0.03806921748,
+    "weekly_err_median": 0.001805493827
+   },
+   "share": 0.05,
+   "week_abs_rel_err": 0.001693996689,
+   "week_est_total": 1749.032118,
+   "week_true_total": 1752
+  },
+  {
+   "days": [
+    {
+     "allocated": 76.1374652,
+     "covered": true,
+     "day": "2025-03-17",
+     "day_text": "Mon 03-17",
+     "est_in_store": 0.0,
+     "est_online": 84.1374652,
+     "est_total": 84.1374652,
+     "label": "closed",
+     "seen": 8,
+     "seen_online": 8,
+     "seen_register": 0,
+     "true_in_store": 0,
+     "true_online": 87,
+     "true_total": 87,
+     "unseen_in_store": 0.0,
+     "unseen_online": 76.1374652,
+     "weekday": "Mon"
+    },
+    {
+     "allocated": 205.8662973,
+     "covered": true,
+     "day": "2025-03-18",
+     "day_text": "Tue 03-18",
+     "est_in_store": 168.5709122,
+     "est_online": 59.29538511,
+     "est_total": 227.8662973,
+     "label": "full",
+     "seen": 22,
+     "seen_online": 9,
+     "seen_register": 13,
+     "true_in_store": 133,
+     "true_online": 91,
+     "true_total": 224,
+     "unseen_in_store": 155.5709122,
+     "unseen_online": 50.29538511,
+     "weekday": "Tue"
+    },
+    {
+     "allocated": 209.7949208,
+     "covered": true,
+     "day": "2025-03-19",
+     "day_text": "Wed 03-19",
+     "est_in_store": 183.0,
+     "est_online": 49.79492082,
+     "est_total": 232.7949208,
+     "label": "partial",
+     "seen": 23,
+     "seen_online": 9,
+     "seen_register": 14,
+     "true_in_store": 146,
+     "true_online": 90,
+     "true_total": 236,
+     "unseen_in_store": 169.0,
+     "unseen_online": 40.79492082,
+     "weekday": "Wed"
+    },
+    {
+     "allocated": 235.8039748,
+     "covered": true,
+     "day": "2025-03-20",
+     "day_text": "Thu 03-20",
+     "est_in_store": 205.3637516,
+     "est_online": 49.4402232,
+     "est_total": 254.8039748,
+     "label": "partial",
+     "seen": 19,
+     "seen_online": 3,
+     "seen_register": 16,
+     "true_in_store": 168,
+     "true_online": 84,
+     "true_total": 252,
+     "unseen_in_store": 189.3637516,
+     "unseen_online": 46.4402232,
+     "weekday": "Thu"
+    },
+    {
+     "allocated": 323.0786374,
+     "covered": true,
+     "day": "2025-03-21",
+     "day_text": "Fri 03-21",
+     "est_in_store": 293.0782385,
+     "est_online": 64.00039891,
+     "est_total": 357.0786374,
+     "label": "partial",
+     "seen": 34,
+     "seen_online": 9,
+     "seen_register": 25,
+     "true_in_store": 247,
+     "true_online": 113,
+     "true_total": 360,
+     "unseen_in_store": 268.0782385,
+     "unseen_online": 55.00039891,
+     "weekday": "Fri"
+    },
+    {
+     "allocated": 332.3595836,
+     "covered": true,
+     "day": "2025-03-22",
+     "day_text": "Sat 03-22",
+     "est_in_store": 332.4513534,
+     "est_online": 44.90823022,
+     "est_total": 377.3595836,
+     "label": "full",
+     "seen": 45,
+     "seen_online": 13,
+     "seen_register": 32,
+     "true_in_store": 287,
+     "true_online": 87,
+     "true_total": 374,
+     "unseen_in_store": 300.4513534,
+     "unseen_online": 31.90823022,
+     "weekday": "Sat"
+    },
+    {
+     "allocated": 191.5623251,
+     "covered": true,
+     "day": "2025-03-23",
+     "day_text": "Sun 03-23",
+     "est_in_store": 159.2129947,
+     "est_online": 56.34933043,
+     "est_total": 215.5623251,
+     "label": "partial",
+     "seen": 24,
+     "seen_online": 5,
+     "seen_register": 19,
+     "true_in_store": 132,
+     "true_online": 87,
+     "true_total": 219,
+     "unseen_in_store": 140.2129947,
+     "unseen_online": 51.34933043,
+     "weekday": "Sun"
+    }
+   ],
+   "fraction_observed": 0.0984300881,
+   "fully_covered": true,
+   "gaps": [
+    {
+     "kind": "outside",
+     "n1": 4384,
+     "n2": 4406,
+     "split": [
+      {
+       "day": "2025-03-17",
+       "in_store": 0.0,
+       "online": 21.0
+      }
+     ],
+     "start_day": "2025-03-17",
+     "t1": "2025-03-17 08:49",
+     "t2": "2025-03-17 17:34",
+     "truth_between": 21,
+     "unseen": 21
+    },
+    {
+     "kind": "inside",
+     "n1": 4556,
+     "n2": 4583,
+     "split": [
+      {
+       "day": "2025-03-18",
+       "in_store": 26.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-18",
+     "t1": "2025-03-18 15:46",
+     "t2": "2025-03-18 17:08",
+     "truth_between": 26,
+     "unseen": 26
+    },
+    {
+     "kind": "inside",
+     "n1": 4784,
+     "n2": 4822,
+     "split": [
+      {
+       "day": "2025-03-19",
+       "in_store": 37.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-19",
+     "t1": "2025-03-19 15:27",
+     "t2": "2025-03-19 16:56",
+     "truth_between": 37,
+     "unseen": 37
+    },
+    {
+     "kind": "inside",
+     "n1": 4977,
+     "n2": 5029,
+     "split": [
+      {
+       "day": "2025-03-20",
+       "in_store": 51.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-20",
+     "t1": "2025-03-20 13:19",
+     "t2": "2025-03-20 15:37",
+     "truth_between": 51,
+     "unseen": 51
+    },
+    {
+     "kind": "mixed",
+     "n1": 5485,
+     "n2": 5518,
+     "split": [
+      {
+       "day": "2025-03-21",
+       "in_store": 16.77831792,
+       "online": 15.22168208
+      }
+     ],
+     "start_day": "2025-03-21",
+     "t1": "2025-03-21 20:21",
+     "t2": "2025-03-21 22:48",
+     "truth_between": 32,
+     "unseen": 32
+    },
+    {
+     "kind": "inside",
+     "n1": 5816,
+     "n2": 5852,
+     "split": [
+      {
+       "day": "2025-03-22",
+       "in_store": 35.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-22",
+     "t1": "2025-03-22 18:30",
+     "t2": "2025-03-22 19:44",
+     "truth_between": 35,
+     "unseen": 35
+    },
+    {
+     "kind": "mixed",
+     "n1": 6073,
+     "n2": 6110,
+     "split": [
+      {
+       "day": "2025-03-23",
+       "in_store": 15.21299472,
+       "online": 20.78700528
+      }
+     ],
+     "start_day": "2025-03-23",
+     "t1": "2025-03-23 17:20",
+     "t2": "2025-03-23 22:33",
+     "truth_between": 36,
+     "unseen": 36
+    }
+   ],
+   "has_anomaly": false,
+   "n_gaps_touching_week": 176,
+   "n_observed": 1743,
+   "pace": [
+    {
+     "learned_per_hour": null,
+     "open": false,
+     "source": "closed",
+     "true_per_hour": null,
+     "weekday": "Mon"
+    },
+    {
+     "learned_per_hour": 21.79890761,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.46666667,
+     "weekday": "Tue"
+    },
+    {
+     "learned_per_hour": 21.93811568,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.45555556,
+     "weekday": "Wed"
+    },
+    {
+     "learned_per_hour": 23.33618516,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.3,
+     "weekday": "Thu"
+    },
+    {
+     "learned_per_hour": 26.37871263,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 26.06,
+     "weekday": "Fri"
+    },
+    {
+     "learned_per_hour": 31.43889968,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 30.86363636,
+     "weekday": "Sat"
+    },
+    {
+     "learned_per_hour": 23.32040929,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.72857143,
+     "weekday": "Sun"
+    }
+   ],
+   "score": {
+    "n_windows": 1741,
+    "n_windows_exact": 1741,
+    "rate_bias": 0.02308196372,
+    "weekly_err_median": 0.001350099231
+   },
+   "share": 0.1,
+   "week_abs_rel_err": 0.001368034134,
+   "week_est_total": 1749.603204,
+   "week_true_total": 1752
+  },
+  {
+   "days": [
+    {
+     "allocated": 67.1962858,
+     "covered": true,
+     "day": "2025-03-17",
+     "day_text": "Mon 03-17",
+     "est_in_store": 0.0,
+     "est_online": 84.1962858,
+     "est_total": 84.1962858,
+     "label": "closed",
+     "seen": 17,
+     "seen_online": 17,
+     "seen_register": 0,
+     "true_in_store": 0,
+     "true_online": 87,
+     "true_total": 87,
+     "unseen_in_store": 0.0,
+     "unseen_online": 67.1962858,
+     "weekday": "Mon"
+    },
+    {
+     "allocated": 189.3291955,
+     "covered": true,
+     "day": "2025-03-18",
+     "day_text": "Tue 03-18",
+     "est_in_store": 168.5745,
+     "est_online": 58.75469552,
+     "est_total": 227.3291955,
+     "label": "full",
+     "seen": 38,
+     "seen_online": 12,
+     "seen_register": 26,
+     "true_in_store": 133,
+     "true_online": 91,
+     "true_total": 224,
+     "unseen_in_store": 142.5745,
+     "unseen_online": 46.75469552,
+     "weekday": "Tue"
+    },
+    {
+     "allocated": 192.1491871,
+     "covered": true,
+     "day": "2025-03-19",
+     "day_text": "Wed 03-19",
+     "est_in_store": 177.0,
+     "est_online": 56.1491871,
+     "est_total": 233.1491871,
+     "label": "partial",
+     "seen": 41,
+     "seen_online": 16,
+     "seen_register": 25,
+     "true_in_store": 146,
+     "true_online": 90,
+     "true_total": 236,
+     "unseen_in_store": 152.0,
+     "unseen_online": 40.1491871,
+     "weekday": "Wed"
+    },
+    {
+     "allocated": 210.4497085,
+     "covered": true,
+     "day": "2025-03-20",
+     "day_text": "Thu 03-20",
+     "est_in_store": 201.0,
+     "est_online": 53.44970849,
+     "est_total": 254.4497085,
+     "label": "full",
+     "seen": 44,
+     "seen_online": 15,
+     "seen_register": 29,
+     "true_in_store": 168,
+     "true_online": 84,
+     "true_total": 252,
+     "unseen_in_store": 172.0,
+     "unseen_online": 38.44970849,
+     "weekday": "Thu"
+    },
+    {
+     "allocated": 284.0824616,
+     "covered": true,
+     "day": "2025-03-21",
+     "day_text": "Fri 03-21",
+     "est_in_store": 288.0317156,
+     "est_online": 71.05074602,
+     "est_total": 359.0824616,
+     "label": "partial",
+     "seen": 75,
+     "seen_online": 25,
+     "seen_register": 50,
+     "true_in_store": 247,
+     "true_online": 113,
+     "true_total": 360,
+     "unseen_in_store": 238.0317156,
+     "unseen_online": 46.05074602,
+     "weekday": "Fri"
+    },
+    {
+     "allocated": 282.2697625,
+     "covered": true,
+     "day": "2025-03-22",
+     "day_text": "Sat 03-22",
+     "est_in_store": 324.0,
+     "est_online": 51.26976251,
+     "est_total": 375.2697625,
+     "label": "full",
+     "seen": 93,
+     "seen_online": 24,
+     "seen_register": 69,
+     "true_in_store": 287,
+     "true_online": 87,
+     "true_total": 374,
+     "unseen_in_store": 255.0,
+     "unseen_online": 27.26976251,
+     "weekday": "Sat"
+    },
+    {
+     "allocated": 170.8824918,
+     "covered": true,
+     "day": "2025-03-23",
+     "day_text": "Sun 03-23",
+     "est_in_store": 154.0567215,
+     "est_online": 63.82577029,
+     "est_total": 217.8824918,
+     "label": "partial",
+     "seen": 47,
+     "seen_online": 20,
+     "seen_register": 27,
+     "true_in_store": 132,
+     "true_online": 87,
+     "true_total": 219,
+     "unseen_in_store": 127.0567215,
+     "unseen_online": 43.82577029,
+     "weekday": "Sun"
+    }
+   ],
+   "fraction_observed": 0.1994578721,
+   "fully_covered": true,
+   "gaps": [
+    {
+     "kind": "outside",
+     "n1": 4441,
+     "n2": 4456,
+     "split": [
+      {
+       "day": "2025-03-17",
+       "in_store": 0.0,
+       "online": 9.068446922
+      },
+      {
+       "day": "2025-03-18",
+       "in_store": 0.0,
+       "online": 4.931553078
+      }
+     ],
+     "start_day": "2025-03-17",
+     "t1": "2025-03-17 21:43",
+     "t2": "2025-03-18 01:14",
+     "truth_between": 14,
+     "unseen": 14
+    },
+    {
+     "kind": "inside",
+     "n1": 4617,
+     "n2": 4633,
+     "split": [
+      {
+       "day": "2025-03-18",
+       "in_store": 15.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-18",
+     "t1": "2025-03-18 18:16",
+     "t2": "2025-03-18 18:42",
+     "truth_between": 15,
+     "unseen": 15
+    },
+    {
+     "kind": "inside",
+     "n1": 4784,
+     "n2": 4817,
+     "split": [
+      {
+       "day": "2025-03-19",
+       "in_store": 32.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-19",
+     "t1": "2025-03-19 15:27",
+     "t2": "2025-03-19 16:42",
+     "truth_between": 32,
+     "unseen": 32
+    },
+    {
+     "kind": "inside",
+     "n1": 4998,
+     "n2": 5020,
+     "split": [
+      {
+       "day": "2025-03-20",
+       "in_store": 21.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-20",
+     "t1": "2025-03-20 14:00",
+     "t2": "2025-03-20 15:15",
+     "truth_between": 21,
+     "unseen": 21
+    },
+    {
+     "kind": "mixed",
+     "n1": 5201,
+     "n2": 5219,
+     "split": [
+      {
+       "day": "2025-03-21",
+       "in_store": 14.21644593,
+       "online": 2.783554073
+      }
+     ],
+     "start_day": "2025-03-21",
+     "t1": "2025-03-21 10:45",
+     "t2": "2025-03-21 11:32",
+     "truth_between": 17,
+     "unseen": 17
+    },
+    {
+     "kind": "inside",
+     "n1": 5794,
+     "n2": 5811,
+     "split": [
+      {
+       "day": "2025-03-22",
+       "in_store": 16.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-22",
+     "t1": "2025-03-22 17:57",
+     "t2": "2025-03-22 18:19",
+     "truth_between": 16,
+     "unseen": 16
+    },
+    {
+     "kind": "mixed",
+     "n1": 6073,
+     "n2": 6092,
+     "split": [
+      {
+       "day": "2025-03-23",
+       "in_store": 15.05672148,
+       "online": 2.943278517
+      }
+     ],
+     "start_day": "2025-03-23",
+     "t1": "2025-03-23 17:20",
+     "t2": "2025-03-23 19:49",
+     "truth_between": 18,
+     "unseen": 18
+    }
+   ],
+   "has_anomaly": false,
+   "n_gaps_touching_week": 356,
+   "n_observed": 3532,
+   "pace": [
+    {
+     "learned_per_hour": null,
+     "open": false,
+     "source": "closed",
+     "true_per_hour": null,
+     "weekday": "Mon"
+    },
+    {
+     "learned_per_hour": 21.8486942,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.46666667,
+     "weekday": "Tue"
+    },
+    {
+     "learned_per_hour": 21.75137338,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.45555556,
+     "weekday": "Wed"
+    },
+    {
+     "learned_per_hour": 22.83333807,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.3,
+     "weekday": "Thu"
+    },
+    {
+     "learned_per_hour": 26.22472907,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 26.06,
+     "weekday": "Fri"
+    },
+    {
+     "learned_per_hour": 31.32779034,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 30.86363636,
+     "weekday": "Sat"
+    },
+    {
+     "learned_per_hour": 23.08085383,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.72857143,
+     "weekday": "Sun"
+    }
+   ],
+   "score": {
+    "n_windows": 3530,
+    "n_windows_exact": 3530,
+    "rate_bias": 0.01521160586,
+    "weekly_err_median": 0.0003408298525
+   },
+   "share": 0.2,
+   "week_abs_rel_err": 0.0003658145924,
+   "week_est_total": 1751.359093,
+   "week_true_total": 1752
+  },
+  {
+   "days": [
+    {
+     "allocated": 59.15732337,
+     "covered": true,
+     "day": "2025-03-17",
+     "day_text": "Mon 03-17",
+     "est_in_store": 0.0,
+     "est_online": 83.15732337,
+     "est_total": 83.15732337,
+     "label": "closed",
+     "seen": 24,
+     "seen_online": 24,
+     "seen_register": 0,
+     "true_in_store": 0,
+     "true_online": 87,
+     "true_total": 87,
+     "unseen_in_store": 0.0,
+     "unseen_online": 59.15732337,
+     "weekday": "Mon"
+    },
+    {
+     "allocated": 155.2403191,
+     "covered": true,
+     "day": "2025-03-18",
+     "day_text": "Tue 03-18",
+     "est_in_store": 160.5558998,
+     "est_online": 67.68441929,
+     "est_total": 228.2403191,
+     "label": "full",
+     "seen": 73,
+     "seen_online": 26,
+     "seen_register": 47,
+     "true_in_store": 133,
+     "true_online": 91,
+     "true_total": 224,
+     "unseen_in_store": 113.5558998,
+     "unseen_online": 41.68441929,
+     "weekday": "Tue"
+    },
+    {
+     "allocated": 160.6218103,
+     "covered": true,
+     "day": "2025-03-19",
+     "day_text": "Wed 03-19",
+     "est_in_store": 166.0,
+     "est_online": 66.62181031,
+     "est_total": 232.6218103,
+     "label": "full",
+     "seen": 72,
+     "seen_online": 29,
+     "seen_register": 43,
+     "true_in_store": 146,
+     "true_online": 90,
+     "true_total": 236,
+     "unseen_in_store": 123.0,
+     "unseen_online": 37.62181031,
+     "weekday": "Wed"
+    },
+    {
+     "allocated": 173.2901074,
+     "covered": true,
+     "day": "2025-03-20",
+     "day_text": "Thu 03-20",
+     "est_in_store": 190.7799888,
+     "est_online": 63.51011865,
+     "est_total": 254.2901074,
+     "label": "full",
+     "seen": 81,
+     "seen_online": 29,
+     "seen_register": 52,
+     "true_in_store": 168,
+     "true_online": 84,
+     "true_total": 252,
+     "unseen_in_store": 138.7799888,
+     "unseen_online": 34.51011865,
+     "weekday": "Thu"
+    },
+    {
+     "allocated": 231.7892864,
+     "covered": true,
+     "day": "2025-03-21",
+     "day_text": "Fri 03-21",
+     "est_in_store": 280.5019394,
+     "est_online": 79.28734704,
+     "est_total": 359.7892864,
+     "label": "full",
+     "seen": 128,
+     "seen_online": 44,
+     "seen_register": 84,
+     "true_in_store": 247,
+     "true_online": 113,
+     "true_total": 360,
+     "unseen_in_store": 196.5019394,
+     "unseen_online": 35.28734704,
+     "weekday": "Fri"
+    },
+    {
+     "allocated": 231.9011534,
+     "covered": true,
+     "day": "2025-03-22",
+     "day_text": "Sat 03-22",
+     "est_in_store": 318.0,
+     "est_online": 56.90115339,
+     "est_total": 374.9011534,
+     "label": "full",
+     "seen": 143,
+     "seen_online": 33,
+     "seen_register": 110,
+     "true_in_store": 287,
+     "true_online": 87,
+     "true_total": 374,
+     "unseen_in_store": 208.0,
+     "unseen_online": 23.90115339,
+     "weekday": "Sat"
+    },
+    {
+     "allocated": 133.3196542,
+     "covered": true,
+     "day": "2025-03-23",
+     "day_text": "Sun 03-23",
+     "est_in_store": 144.8121814,
+     "est_online": 74.50747276,
+     "est_total": 219.3196542,
+     "label": "full",
+     "seen": 86,
+     "seen_online": 37,
+     "seen_register": 49,
+     "true_in_store": 132,
+     "true_online": 87,
+     "true_total": 219,
+     "unseen_in_store": 95.81218143,
+     "unseen_online": 37.50747276,
+     "weekday": "Sun"
+    }
+   ],
+   "fraction_observed": 0.3483736164,
+   "fully_covered": true,
+   "gaps": [
+    {
+     "kind": "outside",
+     "n1": 4391,
+     "n2": 4405,
+     "split": [
+      {
+       "day": "2025-03-17",
+       "in_store": 0.0,
+       "online": 13.0
+      }
+     ],
+     "start_day": "2025-03-17",
+     "t1": "2025-03-17 12:27",
+     "t2": "2025-03-17 17:05",
+     "truth_between": 13,
+     "unseen": 13
+    },
+    {
+     "kind": "inside",
+     "n1": 4556,
+     "n2": 4567,
+     "split": [
+      {
+       "day": "2025-03-18",
+       "in_store": 10.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-18",
+     "t1": "2025-03-18 15:46",
+     "t2": "2025-03-18 16:17",
+     "truth_between": 10,
+     "unseen": 10
+    },
+    {
+     "kind": "outside",
+     "n1": 4895,
+     "n2": 4907,
+     "split": [
+      {
+       "day": "2025-03-19",
+       "in_store": 0.0,
+       "online": 11.0
+      }
+     ],
+     "start_day": "2025-03-19",
+     "t1": "2025-03-19 21:21",
+     "t2": "2025-03-19 22:11",
+     "truth_between": 11,
+     "unseen": 11
+    },
+    {
+     "kind": "inside",
+     "n1": 4945,
+     "n2": 4960,
+     "split": [
+      {
+       "day": "2025-03-20",
+       "in_store": 14.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-20",
+     "t1": "2025-03-20 11:42",
+     "t2": "2025-03-20 12:19",
+     "truth_between": 14,
+     "unseen": 14
+    },
+    {
+     "kind": "inside",
+     "n1": 5359,
+     "n2": 5371,
+     "split": [
+      {
+       "day": "2025-03-21",
+       "in_store": 11.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-21",
+     "t1": "2025-03-21 16:33",
+     "t2": "2025-03-21 16:50",
+     "truth_between": 11,
+     "unseen": 11
+    },
+    {
+     "kind": "inside",
+     "n1": 5832,
+     "n2": 5841,
+     "split": [
+      {
+       "day": "2025-03-22",
+       "in_store": 8.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-22",
+     "t1": "2025-03-22 18:54",
+     "t2": "2025-03-22 19:11",
+     "truth_between": 8,
+     "unseen": 8
+    },
+    {
+     "kind": "outside",
+     "n1": 5921,
+     "n2": 5928,
+     "split": [
+      {
+       "day": "2025-03-23",
+       "in_store": 0.0,
+       "online": 6.0
+      }
+     ],
+     "start_day": "2025-03-23",
+     "t1": "2025-03-23 07:32",
+     "t2": "2025-03-23 10:31",
+     "truth_between": 6,
+     "unseen": 6
+    }
+   ],
+   "has_anomaly": false,
+   "n_gaps_touching_week": 608,
+   "n_observed": 6169,
+   "pace": [
+    {
+     "learned_per_hour": null,
+     "open": false,
+     "source": "closed",
+     "true_per_hour": null,
+     "weekday": "Mon"
+    },
+    {
+     "learned_per_hour": 21.59058662,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.46666667,
+     "weekday": "Tue"
+    },
+    {
+     "learned_per_hour": 21.70639453,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.45555556,
+     "weekday": "Wed"
+    },
+    {
+     "learned_per_hour": 22.63789412,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.3,
+     "weekday": "Thu"
+    },
+    {
+     "learned_per_hour": 26.17727767,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 26.06,
+     "weekday": "Fri"
+    },
+    {
+     "learned_per_hour": 31.0998951,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 30.86363636,
+     "weekday": "Sat"
+    },
+    {
+     "learned_per_hour": 22.95289071,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.72857143,
+     "weekday": "Sun"
+    }
+   ],
+   "score": {
+    "n_windows": 6167,
+    "n_windows_exact": 6167,
+    "rate_bias": 0.008942494387,
+    "weekly_err_median": 0.0003542755993
+   },
+   "share": 0.35,
+   "week_abs_rel_err": 0.0001824510178,
+   "week_est_total": 1752.319654,
+   "week_true_total": 1752
+  },
+  {
+   "days": [
+    {
+     "allocated": 41.76100766,
+     "covered": true,
+     "day": "2025-03-17",
+     "day_text": "Mon 03-17",
+     "est_in_store": 0.0,
+     "est_online": 84.76100766,
+     "est_total": 84.76100766,
+     "label": "closed",
+     "seen": 43,
+     "seen_online": 43,
+     "seen_register": 0,
+     "true_in_store": 0,
+     "true_online": 87,
+     "true_total": 87,
+     "unseen_in_store": 0.0,
+     "unseen_online": 41.76100766,
+     "weekday": "Mon"
+    },
+    {
+     "allocated": 89.63663479,
+     "covered": true,
+     "day": "2025-03-18",
+     "day_text": "Tue 03-18",
+     "est_in_store": 149.0,
+     "est_online": 77.63663479,
+     "est_total": 226.6366348,
+     "label": "full",
+     "seen": 137,
+     "seen_online": 54,
+     "seen_register": 83,
+     "true_in_store": 133,
+     "true_online": 91,
+     "true_total": 224,
+     "unseen_in_store": 66.0,
+     "unseen_online": 23.63663479,
+     "weekday": "Tue"
+    },
+    {
+     "allocated": 100.7730448,
+     "covered": true,
+     "day": "2025-03-19",
+     "day_text": "Wed 03-19",
+     "est_in_store": 157.0,
+     "est_online": 76.77304476,
+     "est_total": 233.7730448,
+     "label": "full",
+     "seen": 133,
+     "seen_online": 51,
+     "seen_register": 82,
+     "true_in_store": 146,
+     "true_online": 90,
+     "true_total": 236,
+     "unseen_in_store": 75.0,
+     "unseen_online": 25.77304476,
+     "weekday": "Wed"
+    },
+    {
+     "allocated": 113.8293128,
+     "covered": true,
+     "day": "2025-03-20",
+     "day_text": "Thu 03-20",
+     "est_in_store": 183.1144968,
+     "est_online": 70.714816,
+     "est_total": 253.8293128,
+     "label": "full",
+     "seen": 140,
+     "seen_online": 51,
+     "seen_register": 89,
+     "true_in_store": 168,
+     "true_online": 84,
+     "true_total": 252,
+     "unseen_in_store": 94.11449678,
+     "unseen_online": 19.714816,
+     "weekday": "Thu"
+    },
+    {
+     "allocated": 154.1067402,
+     "covered": true,
+     "day": "2025-03-21",
+     "day_text": "Fri 03-21",
+     "est_in_store": 274.0,
+     "est_online": 86.10674024,
+     "est_total": 360.1067402,
+     "label": "full",
+     "seen": 206,
+     "seen_online": 66,
+     "seen_register": 140,
+     "true_in_store": 247,
+     "true_online": 113,
+     "true_total": 360,
+     "unseen_in_store": 134.0,
+     "unseen_online": 20.10674024,
+     "weekday": "Fri"
+    },
+    {
+     "allocated": 140.8932598,
+     "covered": true,
+     "day": "2025-03-22",
+     "day_text": "Sat 03-22",
+     "est_in_store": 306.0,
+     "est_online": 67.89325976,
+     "est_total": 373.8932598,
+     "label": "full",
+     "seen": 233,
+     "seen_online": 52,
+     "seen_register": 181,
+     "true_in_store": 287,
+     "true_online": 87,
+     "true_total": 374,
+     "unseen_in_store": 125.0,
+     "unseen_online": 15.89325976,
+     "weekday": "Sat"
+    },
+    {
+     "allocated": 91.0,
+     "covered": true,
+     "day": "2025-03-23",
+     "day_text": "Sun 03-23",
+     "est_in_store": 140.0076003,
+     "est_online": 78.99239974,
+     "est_total": 219.0,
+     "label": "full",
+     "seen": 128,
+     "seen_online": 56,
+     "seen_register": 72,
+     "true_in_store": 132,
+     "true_online": 87,
+     "true_total": 219,
+     "unseen_in_store": 68.00760026,
+     "unseen_online": 22.99239974,
+     "weekday": "Sun"
+    }
+   ],
+   "fraction_observed": 0.5920487915,
+   "fully_covered": true,
+   "gaps": [
+    {
+     "kind": "outside",
+     "n1": 4384,
+     "n2": 4391,
+     "split": [
+      {
+       "day": "2025-03-17",
+       "in_store": 0.0,
+       "online": 6.0
+      }
+     ],
+     "start_day": "2025-03-17",
+     "t1": "2025-03-17 08:49",
+     "t2": "2025-03-17 12:27",
+     "truth_between": 6,
+     "unseen": 6
+    },
+    {
+     "kind": "inside",
+     "n1": 4559,
+     "n2": 4565,
+     "split": [
+      {
+       "day": "2025-03-18",
+       "in_store": 5.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-18",
+     "t1": "2025-03-18 15:51",
+     "t2": "2025-03-18 16:04",
+     "truth_between": 5,
+     "unseen": 5
+    },
+    {
+     "kind": "inside",
+     "n1": 4799,
+     "n2": 4805,
+     "split": [
+      {
+       "day": "2025-03-19",
+       "in_store": 5.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-19",
+     "t1": "2025-03-19 16:07",
+     "t2": "2025-03-19 16:17",
+     "truth_between": 5,
+     "unseen": 5
+    },
+    {
+     "kind": "inside",
+     "n1": 4991,
+     "n2": 4998,
+     "split": [
+      {
+       "day": "2025-03-20",
+       "in_store": 6.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-20",
+     "t1": "2025-03-20 13:43",
+     "t2": "2025-03-20 14:00",
+     "truth_between": 6,
+     "unseen": 6
+    },
+    {
+     "kind": "inside",
+     "n1": 5359,
+     "n2": 5371,
+     "split": [
+      {
+       "day": "2025-03-21",
+       "in_store": 11.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-21",
+     "t1": "2025-03-21 16:33",
+     "t2": "2025-03-21 16:50",
+     "truth_between": 11,
+     "unseen": 11
+    },
+    {
+     "kind": "inside",
+     "n1": 5737,
+     "n2": 5743,
+     "split": [
+      {
+       "day": "2025-03-22",
+       "in_store": 5.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-22",
+     "t1": "2025-03-22 16:19",
+     "t2": "2025-03-22 16:36",
+     "truth_between": 5,
+     "unseen": 5
+    },
+    {
+     "kind": "inside",
+     "n1": 6031,
+     "n2": 6037,
+     "split": [
+      {
+       "day": "2025-03-23",
+       "in_store": 5.0,
+       "online": 0.0
+      }
+     ],
+     "start_day": "2025-03-23",
+     "t1": "2025-03-23 16:00",
+     "t2": "2025-03-23 16:05",
+     "truth_between": 5,
+     "unseen": 5
+    }
+   ],
+   "has_anomaly": false,
+   "n_gaps_touching_week": 1021,
+   "n_observed": 10484,
+   "pace": [
+    {
+     "learned_per_hour": null,
+     "open": false,
+     "source": "closed",
+     "true_per_hour": null,
+     "weekday": "Mon"
+    },
+    {
+     "learned_per_hour": 21.54585493,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.46666667,
+     "weekday": "Tue"
+    },
+    {
+     "learned_per_hour": 21.6750625,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 21.45555556,
+     "weekday": "Wed"
+    },
+    {
+     "learned_per_hour": 22.46782737,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.3,
+     "weekday": "Thu"
+    },
+    {
+     "learned_per_hour": 26.24689037,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 26.06,
+     "weekday": "Fri"
+    },
+    {
+     "learned_per_hour": 31.11297898,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 30.86363636,
+     "weekday": "Sat"
+    },
+    {
+     "learned_per_hour": 22.96960752,
+     "open": true,
+     "source": "learned",
+     "true_per_hour": 22.72857143,
+     "weekday": "Sun"
+    }
+   ],
+   "score": {
+    "n_windows": 10482,
+    "n_windows_exact": 10482,
+    "rate_bias": 0.007778684499,
+    "weekly_err_median": 3.25766506e-05
+   },
+   "share": 0.6,
+   "week_abs_rel_err": 0.0,
+   "week_est_total": 1752.0,
+   "week_true_total": 1752
+  }
+ ],
+ "generated_by": "python -m ordergaps.viz build",
+ "iso_week": 12,
+ "iso_year": 2025,
+ "seed": 101,
+ "week_days": [
+  "2025-03-17",
+  "2025-03-18",
+  "2025-03-19",
+  "2025-03-20",
+  "2025-03-21",
+  "2025-03-22",
+  "2025-03-23"
+ ]
+}

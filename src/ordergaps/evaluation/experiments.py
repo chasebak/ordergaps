@@ -6,6 +6,9 @@
    inside sessions, and observation times are the vendor's own sales, so
    busy periods are oversampled; bias of learned rates vs true rates.
 3. Counted vs allocated: near-exact quantities vs model-based ones.
+
+Beside experiment 1: the same weekly error under the uniform-in-time
+baseline allocator (baseline.py), and the full-day yield per share.
 """
 
 import math
@@ -14,6 +17,11 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
+from ordergaps.baseline import (
+    ALLOCATOR_TIE_ORDERS,
+    full_day_yield_counts,
+    uniform_weekly_totals,
+)
 from ordergaps.classify import FULL, PARTIAL, SPREAD
 from ordergaps.estimator import estimate
 from ordergaps.simulator import simulate, with_share
@@ -33,6 +41,10 @@ class RunMetrics:
     full_day_share_abs_err: float  # |vendor share of all orders on full days - true share|
     full_day_err_median: float  # per-day TOTAL volume |rel err|, full days
     nonfull_day_err_median: float  # per-day TOTAL volume |rel err|, partial+spread days
+    uniform_weekly_err_median: float  # same clean weeks, uniform-in-time allocator
+    n_weeks_allocators_differ: int  # clean weeks whose model and uniform totals differ
+    n_full_days: int  # day labels == FULL
+    n_open_days: int  # day labels != CLOSED
 
 
 def _median(values):
@@ -45,18 +57,45 @@ def run_one(config, seed):
     """Simulate one regime, estimate, and score against ground truth."""
     sim = simulate(config, seed)
     result = estimate(sim.observed, config.store_hours)
+    return score(config, sim, result)
 
+
+def score(config, sim, result):
+    """Score one estimate against the simulator's ground truth.
+
+    The one scoring function behind every estimation number: the README
+    tables (run_all, via run_one / run_matrix) and the Gap Explorer page
+    (ordergaps.viz, which keeps sim and result to draw the week view) both
+    call it, so the page cannot score a run differently from the README.
+
+    Rules: weekly error = |est_total - total| / total over clean weeks
+    (fully covered, no anomaly); window exactness = a gap is exact when the
+    simulator created exactly n2 - n1 - 1 orders strictly between t1 and t2;
+    rate bias = minutes-weighted mean of (learned - true) / true over open
+    weekdays. Failure mode: scoring a result against a different sim (other
+    seed or share) gives plausible but meaningless errors; viz.py builds
+    sim and result together and tests/test_viz.py checks the page's seed-101
+    rows equal run_one's.
+    """
     weekly = result.weekly
     clean = weekly[weekly["fully_covered"] & ~weekly["has_anomaly"]]
     merged = clean.merge(sim.truth_weekly, on=["iso_year", "iso_week"], suffixes=("", "_true"))
+    uniform_totals = uniform_weekly_totals(result)
     weekly_errors = []
+    uniform_errors = []
+    n_weeks_allocators_differ = 0
     channel_errors = []
     merged_tuples = list(merged.itertuples(index=False))
     for row in merged_tuples:
+        uniform_total = uniform_totals[(row.iso_year, row.iso_week)]
+        if abs(uniform_total - row.est_total) > ALLOCATOR_TIE_ORDERS:
+            n_weeks_allocators_differ += 1
         if row.total > 0:
             weekly_errors.append(abs(row.est_total - row.total) / row.total)
+            uniform_errors.append(abs(uniform_total - row.total) / row.total)
         if row.in_store > 0:
             channel_errors.append(abs(row.est_in_store - row.in_store) / row.in_store)
+    n_full_days, n_open_days = full_day_yield_counts(result.day_labels)
 
     bias_weighted_sum = 0.0
     bias_weight_total = 0.0
@@ -118,7 +157,7 @@ def run_one(config, seed):
 
     return RunMetrics(
         share=config.vendor_share,
-        seed=seed,
+        seed=sim.seed,
         fraction_observed=sim.fraction_observed,
         n_weeks_used=len(merged),
         weekly_err_median=_median(weekly_errors),
@@ -129,6 +168,10 @@ def run_one(config, seed):
         full_day_share_abs_err=full_day_share_abs_err,
         full_day_err_median=_median(full_errors),
         nonfull_day_err_median=_median(nonfull_errors),
+        uniform_weekly_err_median=_median(uniform_errors),
+        n_weeks_allocators_differ=n_weeks_allocators_differ,
+        n_full_days=n_full_days,
+        n_open_days=n_open_days,
     )
 
 
@@ -261,3 +304,60 @@ def counted_vs_allocated(records, table_share):
         "nonfull_day_err_p75": float(np.nanpercentile(nonfull_day, 75)),
     }
     return summary
+
+
+def versus_uniform(model_err, uniform_err):
+    """Verdict of the model against the uniform-in-time baseline.
+
+    Rule: "tie" when the two medians print the same at the table's precision
+    (4 decimals of a percent); otherwise the lower one wins. The difference
+    model - uniform is reported in percentage points either way, so a win
+    for the baseline is printed exactly like a win for the model.
+    Failure mode: a tolerance looser than the printed precision would hide
+    a printed loss as a tie; this rule ties only what the reader cannot tell
+    apart.
+    """
+    model_text = f"{model_err:.4%}"
+    uniform_text = f"{uniform_err:.4%}"
+    if model_text == uniform_text:
+        return "tie"
+    if model_err < uniform_err:
+        return "model lower"
+    return "uniform lower"
+
+
+def baseline_and_yield(records):
+    """Per share: model vs uniform weekly error, and the full-day yield.
+
+    Weekly errors are aggregated like error_curve (median across seeds of
+    each run's median over clean weeks), on the same weeks for both
+    allocators. The yield is pooled: all seeds' FULL days ÷ all seeds'
+    non-closed days.
+    """
+    rows = []
+    share_values = sorted(records["share"].unique())
+    for share in share_values:
+        share_rows = records[records["share"] == share]
+        model_err = float(share_rows["weekly_err_median"].median())
+        uniform_err = float(share_rows["uniform_weekly_err_median"].median())
+        n_full_days = int(share_rows["n_full_days"].sum())
+        n_open_days = int(share_rows["n_open_days"].sum())
+        if n_open_days > 0:
+            full_day_yield = n_full_days / n_open_days
+        else:
+            full_day_yield = float("nan")
+        rows.append(
+            {
+                "share": float(share),
+                "model_weekly_err": model_err,
+                "uniform_weekly_err": uniform_err,
+                "model_minus_uniform": model_err - uniform_err,
+                "verdict": versus_uniform(model_err, uniform_err),
+                "n_clean_weeks": int(share_rows["n_weeks_used"].sum()),
+                "n_weeks_allocators_differ": int(share_rows["n_weeks_allocators_differ"].sum()),
+                "n_full_days": n_full_days,
+                "n_open_days": n_open_days,
+                "full_day_yield": full_day_yield,
+            }
+        )
+    return pd.DataFrame(rows)

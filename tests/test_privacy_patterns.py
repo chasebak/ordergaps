@@ -1,7 +1,7 @@
 """Public privacy check: generic leak patterns in every file git would publish.
 
 Why: this repo is public and runs on synthetic data only. Privacy is checked
-in two layers (PROOF_UPGRADE_PLAN.md, "Shared standards" (c) 6):
+in two layers:
 - this public file holds GENERIC patterns only, so it can sit in a public
   repo without naming what it guards;
 - real store, vendor and staff names live in one private deny file outside
@@ -46,6 +46,13 @@ HEX64_PATTERN = re.compile(r"(?<![0-9A-Fa-f])[0-9A-Fa-f]{64}(?![0-9A-Fa-f])")
 # and the whole part of one.
 CERT_PATTERN = re.compile(r"(?<![\d.])\d{8,10}(?!\d|\.\d)")
 NOREPLY_DOMAIN = "users.noreply.github.com"
+# A percent followed by an arrow (or "to") and another percent: the shape of
+# a store-share change, which needs the owner's OK and never appears in
+# public text. A regex, not a substring ban: "0.0345%"
+# contains "5%" and must stay legal.
+SHARE_CHANGE_PATTERN = re.compile(
+    r"\d+(?:\.\d+)?\s?%\s*(?:\u2192|->|=>|\u21d2|to)\s*\d+(?:\.\d+)?\s?%"
+)
 
 
 def git_paths(extra_args):
@@ -205,6 +212,12 @@ def test_no_cert_like_digit_runs(published_lines):
     assert hits == []
 
 
+def test_no_share_change_patterns(published_lines):
+    """A 'X% -> Y%' pair is shaped like a store-share change (owner-gated)."""
+    hits = find_hits(published_lines, SHARE_CHANGE_PATTERN, "share-change pattern")
+    assert hits == []
+
+
 def test_no_deny_file_in_repo():
     """A deny* file inside the repo would publish the private names it exists to guard.
 
@@ -305,6 +318,29 @@ def test_control_cert_pattern_passes_synthetic_shapes():
     for text in synthetic_texts:
         hits = find_hits(planted_lines(text), CERT_PATTERN, "cert-like digit run")
         assert hits == [], text
+
+
+def test_control_share_change_pattern_matches_planted_examples():
+    # Built from pieces so this file does not match its own pattern.
+    arrow = "\u2192"
+    pct = "%"
+    planted_texts = [
+        "share went 3" + pct + " " + arrow + " 9" + pct,
+        "3" + pct + arrow + "9" + pct,
+        "from 2" + pct + " to 7" + pct + " of orders",
+        "0.38" + pct + " -> 0.015" + pct,
+    ]
+    for text in planted_texts:
+        hits = find_hits(planted_lines(text), SHARE_CHANGE_PATTERN, "share-change pattern")
+        assert hits == ["planted.txt:1: share-change pattern"], text
+    legal_texts = [
+        "median error 0.0345% at share 0.35",
+        "between 2% and 60%",
+        "-0.22% -> PASS",
+        "3% of orders",
+    ]
+    for text in legal_texts:
+        assert find_hits(planted_lines(text), SHARE_CHANGE_PATTERN, "x") == [], text
 
 
 def test_control_deny_file_name_check_catches_planted_paths():
