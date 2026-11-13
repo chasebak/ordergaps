@@ -20,11 +20,11 @@ before hashing, so every byte that existed at pin time must still be there
 unchanged, while the added block is checked on its own against
 results/baseline_yield.md (tests/test_readme_drift.py).
 
-The why boxes under tables 1, 2 and 3 (added 2026-11-04 with the Gap
-Explorer page, which shares their text) are cut out the same way: each is
-removed as the exact block run_all.section_why_block() prints plus its blank
-line, so a why box that is reworded on one side no longer cuts cleanly and
-moves the hash; tests/test_readme_drift.py checks the boxes themselves.
+The why boxes under tables 1, 2 and 3 (added 2026-11-04, also after the
+pin) are cut out the same way: each is removed as the exact block
+run_all.section_why_block() prints plus its blank line, so a why box that
+is reworded on one side no longer cuts cleanly and moves the hash;
+tests/test_readme_drift.py checks the boxes themselves.
 
 Failure mode guarded: a simulator edit that adds, removes or reorders an
 rng call (silently shifting every frozen number), and a hand edit of the

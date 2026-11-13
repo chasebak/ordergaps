@@ -3,9 +3,9 @@
 Dated entries, one per choice, written as "decided X because measurement Y;
 alternative Z lost by N". Nulls and reversals go in too. Every number below
 is copied from `results/forecast.md` (README Results section 4),
-`results/baseline_yield.md` (README sections 1.1 and 1.2), the Gap
-Explorer's page data (`docs/data/*.json`) or from the pre-registration in
-PREDICTIONS.md; `tests/test_decisions_numbers.py` fails if one is not.
+`results/baseline_yield.md` (README sections 1.1 and 1.2) or from the
+pre-registration in PREDICTIONS.md; `tests/test_decisions_numbers.py`
+fails if one is not.
 
 ## 2026-11-04 · Forecasting: rolling-origin folds, never shuffled k-fold
 
@@ -150,56 +150,30 @@ Alternative "covered days only" was not built: it moves the denominator by
 at most the two edge days per seed and would stop matching the estimator's
 own label table.
 
-## 2026-11-04 · Gap Explorer: one interior week of one seed, at the frozen shares
-
-Decided the page's week view shows seed 101's ISO 2025-W12 at each of the
-frozen shares, because that week has no edge day and lies before the
-planted numbering reset (tests/test_viz.py asserts both), and because the
-seed's vendor orders are nested across shares, so the slider shows the
-same week becoming countable rather than six different weeks. Measured:
-the whole page bundle is 16958 + 25444 + 43257 bytes of data plus
-meta.json (`docs/data/meta.json`), well under the 300000-byte budget.
-Alternative "every seed's week" was not built: the tiles and tables are
-already medians over all seeds, and a second week would show nothing the
-tiles do not.
-
-## 2026-11-04 · Worked gaps: the largest gap that starts each day, not every gap
-
-Decided the page lists, per day of the week, only the gap with the most
-unseen orders, because the number of gaps touching the week grows with the
-share: 45 at vendor share 0.02 and 1021 at 0.60 (`docs/data/week.json`,
-n_gaps_touching_week). Listing every gap would turn the page into an
-order-level dump, which the bundle check forbids (no list as long as the
-data rows). Every listed gap is checked against the simulator: unseen =
-n2 - n1 - 1 = the orders created in between.
-
-## 2026-11-04 · The page prints the README's own formatted text
-
-Decided every tile and table on the page prints text formatted in Python by
-the README's functions (run_all.counted_rows for section 3, the same
-format strings for sections 1, 1.1 and 1.2), because the page should hold
-no second rounding rule: the README's 13713/13713 and the page's
-13,713 / 13,713 come from one call. Alternative "format raw numbers in
-JavaScript" lost because a second formatter could round a printed loss into
-a tie. The page's JavaScript still formats some values itself: chart axes
-and tooltips, and the per-day and per-gap numbers of one week (week note,
-week table, pace table, gap split) plus the hero-table and acceptance-note
-values, each to a fixed number of decimals; the tiles and the section 3
-table are Python text.
-
 ## 2026-11-04 · Why boxes under tables 1-3, cut out of the frozen hash
 
-Decided to print the shared "why this metric" box under README tables 1, 2
-and 3 (the same text the page shows) and to cut each box out before the
-frozen README hash, because the hash pinned before any forecasting edit
-must keep proving that the frozen numbers never moved; with the boxes cut,
-it still matches. Alternative "re-pin the hash" lost because a re-pinned
+Decided to print a "why this metric" box under README tables 1, 2 and 3
+(one copy of the text, in run_all.WHY_THIS_METRIC) and to cut each box out
+before the frozen README hash, because the hash pinned before any
+forecasting edit must keep proving that the frozen numbers never moved;
+with the boxes cut, it still matches. Alternative "re-pin the hash" lost because a re-pinned
 hash proves nothing about the bytes it replaced. A box reworded in the
 README only no longer cuts cleanly, so it moves the hash (control test).
 
-## 2026-11-04 · The forecast view waits for v2
+## 2026-11-13 · The Gap Explorer page is retired; its address forwards
 
-Decided to ship the page with the four estimation views and no forecast
-view, because the estimation views explain the core claim on their own
-and section 4's numbers are already printed in the README; a page view would need its own
-data file and parity tests. Listed under "What to improve next".
+Decided to retire the interactive Gap Explorer page and to replace
+`docs/index.html` with a forwarding page that opens the Grading Play
+Calculator in grace-grading-roi
+(https://chasebak.github.io/grace-grading-roi/play/), because the repo
+owner replaced the page with a grading calculator that serves his main
+use. No measurement is behind this entry: it is the owner's choice of
+which page to keep. The estimator and its validation are unchanged: the
+simulator, the evaluation experiments, the forecast backtest and every
+README result number are what they were. Removed with the page: its data
+build (`ordergaps.viz`), its data files, script and style sheet, their
+tests, and the entries of this log that described only the page (the week
+shown, the worked gaps, the shared number text, the forecast view left for
+later). Alternative "delete `docs/` outright" lost because links to the
+old address would stop working. The last version with the page is tagged
+`gap-explorer-final`.

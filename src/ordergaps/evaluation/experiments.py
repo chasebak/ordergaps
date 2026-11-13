@@ -64,18 +64,15 @@ def score(config, sim, result):
     """Score one estimate against the simulator's ground truth.
 
     The one scoring function behind every estimation number: the README
-    tables (run_all, via run_one / run_matrix) and the Gap Explorer page
-    (ordergaps.viz, which keeps sim and result to draw the week view) both
-    call it, so the page cannot score a run differently from the README.
+    tables come from it (run_all, via run_one / run_matrix).
 
     Rules: weekly error = |est_total - total| / total over clean weeks
     (fully covered, no anomaly); window exactness = a gap is exact when the
     simulator created exactly n2 - n1 - 1 orders strictly between t1 and t2;
     rate bias = minutes-weighted mean of (learned - true) / true over open
     weekdays. Failure mode: scoring a result against a different sim (other
-    seed or share) gives plausible but meaningless errors; viz.py builds
-    sim and result together and tests/test_viz.py checks the page's seed-101
-    rows equal run_one's.
+    seed or share) gives plausible but meaningless errors; run_one builds
+    sim and result together from one config and seed.
     """
     weekly = result.weekly
     clean = weekly[weekly["fully_covered"] & ~weekly["has_anomaly"]]

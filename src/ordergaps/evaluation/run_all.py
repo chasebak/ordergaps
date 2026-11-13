@@ -59,12 +59,10 @@ BASELINE_WHY_KEYS = ("uniform_baseline", "full_day_yield")
 # Results section -> its why box, printed under the section's table.
 SECTION_WHY_KEYS = {"1": "weekly_error", "2": "length_bias", "3": "counted_vs_allocated"}
 
-# The "why this metric" boxes for the estimation sections: one copy, shared
-# by the README and the Gap Explorer page (docs/, written by ordergaps.viz).
+# The "why this metric" boxes for the estimation sections: one copy.
 # Sections 1, 2 and 3 print their box under the table (results_markdown;
 # the README copies the same lines, tests/test_readme_drift.py); 1.1 and 1.2
-# go into baseline_yield.md / baseline_yield.json; week_view and worked_gap
-# are page-only widgets.
+# go into baseline_yield.md / baseline_yield.json.
 WHY_THIS_METRIC = {
     "weekly_error": {
         "question": (
@@ -104,36 +102,6 @@ WHY_THIS_METRIC = {
         "lie": (
             "A timestamp-precision slip or a mishandled numbering reset would break exactness; "
             "tests/test_acceptance.py requires every window exact at every share and seed."
-        ),
-    },
-    "week_view": {
-        "question": (
-            "What does one week look like at my share: which days can I count, and how much "
-            "of each day did the model fill in?"
-        ),
-        "kind": (
-            "Seen orders are counted (the vendor's own); the allocated part is modelled (gap "
-            "counts spread by store hours and the learned pace); the marker is the "
-            "simulator's true daily total."
-        ),
-        "lie": (
-            "An allocator that lost or invented orders would still draw plausible bars; "
-            "tests/test_viz.py checks seen + allocated = estimated total on every day."
-        ),
-    },
-    "worked_gap": {
-        "question": (
-            "I saw order #a and then order #b: how many orders did the store take in "
-            "between, and when?"
-        ),
-        "kind": (
-            "Counted: exactly b - a - 1 orders (ID arithmetic), checked against the "
-            "simulator's own count; which day and channel they went to is modelled."
-        ),
-        "lie": (
-            "Voided orders still use numbers, so a check that skipped them would disagree; "
-            "tests/test_viz.py requires unseen = n2 - n1 - 1 = the simulated count for every "
-            "listed gap."
         ),
     },
     "uniform_baseline": {
@@ -443,13 +411,11 @@ def baseline_why():
 def counted_rows(table):
     """Section 3's rows as (quantity, kind, error text), from counted_vs_allocated().
 
-    One formatter for the README table (results_markdown) and the Gap
-    Explorer's counted-vs-modelled table (ordergaps.viz), so the page prints
-    exactly the README's wording and rounding. Rule: error bars (IQR across
-    seeds) only on the allocated rows; counted rows carry exact or
-    sampling-only numbers. Failure mode: a second formatter on the page
-    could round differently; tests/test_viz.py compares the page's rows at
-    vendor share 0.10 to these.
+    The formatter behind the README table (results_markdown). Rule: error
+    bars (IQR across seeds) only on the allocated rows; counted rows carry
+    exact or sampling-only numbers. Failure mode: a README row typed by hand
+    could round differently; tests/test_readme_drift.py compares the README's
+    rows to these.
     """
     rows = [
         (
@@ -496,7 +462,7 @@ def section_why_block(section):
 def baseline_summary_json(baseline, table):
     """baseline_yield.json: the rows of sections 1.1 / 1.2, the section-1.3
     KPI values from counted_vs_allocated() ("kpi") and the shared "why this
-    metric" text, for the page (numbers to 10 significant digits)."""
+    metric" text (numbers to 10 significant digits)."""
     rows = []
     baseline_tuples = list(baseline.itertuples(index=False))
     for row in baseline_tuples:

@@ -23,10 +23,8 @@ only), and the two headline lines under the title must equal
 forecast_summary.json "readme_headline".
 
 The why boxes under tables 1, 2 and 3 must equal the shared
-run_all.WHY_THIS_METRIC text (run_all.section_why_block, also shown on the
-Gap Explorer page), one box per section; the README's "Try it" line must
-equal viz.readme_try_it_line(), which is also written into
-docs/data/summary.json (its share stops come from run_all.SHARES).
+run_all.WHY_THIS_METRIC text (run_all.section_why_block), one box per
+section.
 
 Rule (what is checked):
 - Only the README section "## Results ..." up to the next "## " heading.
@@ -72,7 +70,6 @@ from ordergaps.evaluation.run_all import (
     results_markdown,
     section_why_block,
 )
-from ordergaps.viz import SUMMARY_PATH, readme_try_it_line
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 README_PATH = REPO_ROOT / "README.md"
@@ -374,11 +371,3 @@ def test_control_a_reworded_why_box_is_caught():
     altered_text = readme_text.replace(original, original.replace("too high", "too big"))
     assert altered_text != readme_text
     assert why_box_problems(altered_text) == ["section 2: shared why box found 0 times"]
-
-
-def test_readme_try_it_line_is_the_generated_line():
-    readme_text = README_PATH.read_text(encoding="utf-8")
-    line = readme_try_it_line()
-    assert readme_text.splitlines().count(line) == 1
-    summary = json.loads((REPO_ROOT / SUMMARY_PATH).read_text(encoding="utf-8"))
-    assert summary["readme_try_it"] == line

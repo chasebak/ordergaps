@@ -170,28 +170,6 @@ section 3 (per-day error on full days).
 | "totals differ" tolerance | more than 1e-6 orders in a week | design choice (the same sums added in another order differ by far less) | a tolerance close to a real allocation difference would undercount the weeks that differ |
 | yield denominator | every non-closed labelled day, first and last day included | design choice (one count over the estimator's day_labels) | covered days only would move each share's yield by at most the two edge days per seed |
 
-## Gap Explorer page
-
-`python -m ordergaps.viz build` writes the page data in `docs/data/` from
-the simulator and the estimator alone: it takes no input file, exports no
-basket items or totals, and the page computes nothing. Per vendor share it
-carries the README's section 1-3 numbers (the same functions, the same
-formatted text), every frozen run's score (`experiments.score`, the one
-scoring function behind run_one), and one simulated week: each day's seen
-orders (counted), allocated orders (modelled) and true total, the learned
-vs true open-hours pace, and the largest gap that starts each day with its
-counted size (n2 - n1 - 1), the simulator's count and the modelled split.
-
-### Assumptions
-
-| knob | value | source | what changes if wrong |
-|---|---|---|---|
-| week shown | seed 101, ISO 2025-W12 | design choice (the first frozen seed; an interior week before the planted reset) | another seed or week shows other bars; the tiles and tables are medians over all seeds and do not change |
-| slider stops | the frozen shares only | frozen config (run_all.SHARES) | the page never interpolates between stops, so an unlisted share has no number |
-| worked gaps | the largest gap starting each day | design choice (the gap with the most orders to place) | small gaps sit inside one session and look trivially in-store; listing all would grow with the share |
-| pace unit | learned rate x 60 (orders per open hour) | arithmetic in Python | none; it rescales the learned and true pace alike |
-| number text | Python format strings shared with the README | design choice (one rounding rule) | a JavaScript formatter could print a different rounding than the README |
-
 ## References
 
 - Ruggles, R., & Brodie, H. (1947). An Empirical Approach to Economic
