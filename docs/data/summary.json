@@ -409,7 +409,7 @@
   "tiles": "synthetic truth \u00b7 8 seeds at this share",
   "week": "synthetic truth \u00b7 seed 101 \u00b7 ISO 2025-W12 \u00b7 one simulated week"
  },
- "readme_try_it": "**Try it (60 s):** the Gap Explorer page in `docs/` (`python -m http.server -d docs`, then open the address it prints) lets you drag the share of store orders you see between 2% and 60% and watch one simulated week become countable; every number on it comes from `python -m ordergaps.viz build`.",
+ "readme_try_it": "**Try it (60 s):** the Gap Explorer page at https://chasebak.github.io/ordergaps/ (or locally: `python -m http.server -d docs`) lets you drag the share of store orders you see between 2% and 60% and watch one simulated week become countable; every number on it comes from `python -m ordergaps.viz build`.",
  "seeds": [
   101,
   202,

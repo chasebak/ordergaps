@@ -103,6 +103,7 @@ FOOTER = (
     "Every number was computed by this repo's tested Python and copied; the page computes nothing."
 )
 TITLE = "Gap Explorer"
+PAGE_URL = "https://chasebak.github.io/ordergaps/"
 WEEK_SEED = 101
 WEEK_ISO_YEAR = 2025
 WEEK_ISO_WEEK = 12
@@ -353,14 +354,13 @@ def share_label(share):
 def readme_try_it_line():
     """The README's 'Try it' line (tests/test_readme_drift.py requires it verbatim).
 
-    It names the page's folder and how to serve it; it claims no live URL,
-    because GitHub Pages is switched on by hand in the repo settings.
+    It names the hosted page and the local way to serve the same files.
     """
     first = share_label(SHARES[0])
     last = share_label(SHARES[-1])
     return (
-        f"**Try it (60 s):** the {TITLE} page in `docs/` "
-        "(`python -m http.server -d docs`, then open the address it prints) lets you drag "
+        f"**Try it (60 s):** the {TITLE} page at {PAGE_URL} "
+        "(or locally: `python -m http.server -d docs`) lets you drag "
         f"the share of store orders you see between {first} and {last} and watch one simulated "
         "week become countable; every number on it comes from `python -m ordergaps.viz build`."
     )

@@ -157,7 +157,7 @@ frozen shares, because that week has no edge day and lies before the
 planted numbering reset (tests/test_viz.py asserts both), and because the
 seed's vendor orders are nested across shares, so the slider shows the
 same week becoming countable rather than six different weeks. Measured:
-the whole page bundle is 16949 + 25444 + 43257 bytes of data plus
+the whole page bundle is 16958 + 25444 + 43257 bytes of data plus
 meta.json (`docs/data/meta.json`), well under the 300000-byte budget.
 Alternative "every seed's week" was not built: the tiles and tables are
 already medians over all seeds, and a second week would show nothing the

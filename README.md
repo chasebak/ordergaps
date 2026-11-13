@@ -6,7 +6,7 @@ Next week's orders, day by day: the daily forecasts miss 5.64% vs 6.78% for last
 
 How much does the whole store sell? Exact order-number arithmetic + a temporal allocation model, validated against a simulator with ground truth.
 
-**Try it (60 s):** the Gap Explorer page in `docs/` (`python -m http.server -d docs`, then open the address it prints) lets you drag the share of store orders you see between 2% and 60% and watch one simulated week become countable; every number on it comes from `python -m ordergaps.viz build`.
+**Try it (60 s):** the Gap Explorer page at https://chasebak.github.io/ordergaps/ (or locally: `python -m http.server -d docs`) lets you drag the share of store orders you see between 2% and 60% and watch one simulated week become countable; every number on it comes from `python -m ordergaps.viz build`.
 
 [![CI](https://github.com/chasebak/ordergaps/actions/workflows/ci.yml/badge.svg)](https://github.com/chasebak/ordergaps/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13-blue)
